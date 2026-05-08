@@ -103,7 +103,10 @@ func NewApp() (*App, error) {
 	// `make swag` (which runs `swag init -g cmd/api/main.go`). The
 	// _ "<module>/docs" import in main.go registers the spec at init
 	// time, so this route just needs to point at it.
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(
+		swaggerFiles.Handler,
+		ginSwagger.URL("/swagger/doc.json"),
+	))
 
 	// Compose the bounded contexts. Users owns identity CRUD, Auth
 	// owns credential / session flows; Auth depends on Users for

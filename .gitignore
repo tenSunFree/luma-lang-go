@@ -10,5 +10,10 @@ bin/
 # Coverage
 coverage.out
 coverage.html
+
 # Logger test artifacts
 *.log
+
+# IDE
+.idea/
+*.iml

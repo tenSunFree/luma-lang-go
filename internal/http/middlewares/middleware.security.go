@@ -1,6 +1,8 @@
 package middlewares
 
 import (
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	"github.com/snykk/go-rest-boilerplate/internal/config"
 	"github.com/snykk/go-rest-boilerplate/internal/constants"
@@ -25,18 +27,14 @@ func SecurityHeadersMiddleware() gin.HandlerFunc {
 		h.Set("X-Content-Type-Options", "nosniff")
 		h.Set("X-Frame-Options", "DENY")
 		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
-		// API responses are JSON; they never legitimately load
-		// scripts, styles, frames, or images. default-src 'none' makes
-		// any accidental HTML response inert in the browser.
-		h.Set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
-		// Permissions-Policy: deny everything by default. Cheap and
-		// covers powerful APIs (camera, geolocation, etc.) that an
-		// API surface should never need.
+		if strings.HasPrefix(c.Request.URL.Path, "/swagger/") {
+			h.Set("Content-Security-Policy",
+				"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-ancestors 'none'")
+		} else {
+			h.Set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+		}
 		h.Set("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
 		if isProduction {
-			// HSTS only in production — sending it from a dev server
-			// on http://localhost teaches the browser to refuse plain
-			// HTTP for that host for a year, which is a footgun.
 			h.Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
 		}
 		c.Next()
