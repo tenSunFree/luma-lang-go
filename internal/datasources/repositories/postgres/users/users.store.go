@@ -26,10 +26,11 @@ func (r *postgreUserRepository) Store(ctx context.Context, inDom *domain.User) (
 	// GetByEmail failed (network blip, replica lag) the INSERT was
 	// already committed and the user was orphaned in the response.
 	rows, err := r.conn.NamedQueryContext(ctx, `
-		INSERT INTO users(id, username, email, password, active, role_id, created_at)
-		VALUES (uuid_generate_v4(), :username, :email, :password, false, :role_id, :created_at)
-		RETURNING id, username, email, password, active, role_id, created_at, updated_at, deleted_at
-	`, userRecord)
+        INSERT INTO users(id, username, full_name, email, phone, gender, password, active, role_id, created_at)
+        VALUES (uuid_generate_v4(), :username, :full_name, :email, :phone, :gender, :password, false, :role_id, :created_at)
+        RETURNING id, username, full_name, email, phone, gender, password, active, role_id,
+                  created_at, updated_at, deleted_at
+    `, userRecord)
 	if err != nil {
 		var pqErr *pq.Error
 		if errors.As(err, &pqErr) && pqErr.Code == "23505" {

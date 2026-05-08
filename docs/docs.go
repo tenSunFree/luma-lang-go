@@ -43,7 +43,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest"
+                            "$ref": "#/definitions/requests.LoginRequest"
                         }
                     }
                 ],
@@ -53,13 +53,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -69,25 +69,25 @@ const docTemplate = `{
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Invalid email or password",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account not yet activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -113,7 +113,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
+                            "$ref": "#/definitions/requests.RefreshRequest"
                         }
                     }
                 ],
@@ -121,19 +121,19 @@ const docTemplate = `{
                     "200": {
                         "description": "Logged out",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Refresh token invalid",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -164,7 +164,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest"
+                            "$ref": "#/definitions/requests.ChangePasswordRequest"
                         }
                     }
                 ],
@@ -172,25 +172,25 @@ const docTemplate = `{
                     "200": {
                         "description": "Password changed",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Current password incorrect",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -216,7 +216,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest"
+                            "$ref": "#/definitions/requests.ForgotPasswordRequest"
                         }
                     }
                 ],
@@ -224,19 +224,19 @@ const docTemplate = `{
                     "200": {
                         "description": "Reset email queued (or email not registered — same response either way)",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -262,7 +262,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest"
+                            "$ref": "#/definitions/requests.ResetPasswordRequest"
                         }
                     }
                 ],
@@ -270,25 +270,25 @@ const docTemplate = `{
                     "200": {
                         "description": "Password reset",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Reset token invalid or expired",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -314,7 +314,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
+                            "$ref": "#/definitions/requests.RefreshRequest"
                         }
                     }
                 ],
@@ -324,13 +324,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -340,19 +340,19 @@ const docTemplate = `{
                     "401": {
                         "description": "Refresh token invalid, expired, or already revoked",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account no longer active",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -378,7 +378,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest"
+                            "$ref": "#/definitions/requests.RegisterRequest"
                         }
                     }
                 ],
@@ -388,13 +388,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -404,25 +404,25 @@ const docTemplate = `{
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "409": {
                         "description": "Email or username already in use",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error (per-field detail in data.errors)",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Internal error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -448,7 +448,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest"
+                            "$ref": "#/definitions/requests.SendOTPRequest"
                         }
                     }
                 ],
@@ -456,31 +456,31 @@ const docTemplate = `{
                     "200": {
                         "description": "OTP enqueued",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Account already activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Failed to enqueue mail",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -506,7 +506,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest"
+                            "$ref": "#/definitions/requests.VerifyOTPRequest"
                         }
                     }
                 ],
@@ -514,31 +514,31 @@ const docTemplate = `{
                     "200": {
                         "description": "Account activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid OTP code",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Locked out — too many invalid attempts",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -565,13 +565,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -581,13 +581,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Missing or invalid token",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "User no longer exists",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -595,7 +595,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest": {
+        "requests.ChangePasswordRequest": {
             "type": "object",
             "required": [
                 "current_password",
@@ -614,7 +614,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest": {
+        "requests.ForgotPasswordRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -626,7 +626,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest": {
+        "requests.LoginRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -644,7 +644,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest": {
+        "requests.RefreshRequest": {
             "type": "object",
             "required": [
                 "refresh_token"
@@ -655,10 +655,11 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest": {
+        "requests.RegisterRequest": {
             "type": "object",
             "required": [
                 "email",
+                "full_name",
                 "password",
                 "username"
             ],
@@ -667,9 +668,27 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 50
                 },
+                "full_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "male",
+                        "female",
+                        "other"
+                    ]
+                },
                 "password": {
                     "type": "string",
                     "maxLength": 72,
+                    "minLength": 8
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 20,
                     "minLength": 8
                 },
                 "username": {
@@ -679,7 +698,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest": {
+        "requests.ResetPasswordRequest": {
             "type": "object",
             "required": [
                 "new_password",
@@ -696,7 +715,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest": {
+        "requests.SendOTPRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -708,7 +727,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest": {
+        "requests.VerifyOTPRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -724,7 +743,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse": {
+        "responses.UserResponse": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -733,7 +752,16 @@ const docTemplate = `{
                 "email": {
                     "type": "string"
                 },
+                "full_name": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
                 "id": {
+                    "type": "string"
+                },
+                "phone": {
                     "type": "string"
                 },
                 "refresh_token": {
@@ -753,7 +781,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse": {
+        "v1.BaseResponse": {
             "type": "object",
             "properties": {
                 "data": {},

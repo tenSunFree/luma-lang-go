@@ -1,0 +1,6 @@
+DROP INDEX IF EXISTS idx_users_phone;
+
+ALTER TABLE users
+    DROP COLUMN IF EXISTS gender,
+    DROP COLUMN IF EXISTS phone,
+    DROP COLUMN IF EXISTS full_name;

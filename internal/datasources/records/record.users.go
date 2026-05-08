@@ -7,7 +7,10 @@ import (
 type Users struct {
 	Id                string     `db:"id"`
 	Username          string     `db:"username"`
+	FullName          string     `db:"full_name"`
 	Email             string     `db:"email"`
+	Phone             *string    `db:"phone"`
+	Gender            *string    `db:"gender"`
 	Password          string     `db:"password"`
 	Active            bool       `db:"active"`
 	RoleId            int        `db:"role_id"`

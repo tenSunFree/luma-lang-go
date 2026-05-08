@@ -39,7 +39,14 @@ var (
 	ErrEmptyEmail    = errors.New("email cannot be empty")
 	ErrInvalidEmail  = errors.New("email format is invalid")
 	ErrEmptyPassword = errors.New("password cannot be empty")
+	ErrInvalidGender = errors.New("gender must be male, female, or other")
+	ErrEmptyPhone    = errors.New("phone cannot be empty")
 )
+
+// ValidGenders is a set of permissible genders.
+var ValidGenders = map[string]bool{
+	"male": true, "female": true, "other": true,
+}
 
 // User is the domain entity for a registered account. Password
 // always carries the bcrypt hash post-construction — plaintext only
@@ -47,7 +54,10 @@ var (
 type User struct {
 	ID                string
 	Username          string
+	FullName          string
 	Email             string
+	Phone             *string
+	Gender            *string
 	Password          string
 	Active            bool
 	RoleID            int
@@ -65,7 +75,8 @@ type User struct {
 // stays free of configuration concerns; the caller injects it. Out-
 // of-range values fall back to bcrypt.DefaultCost so a misconfigured
 // outer layer can't make this panic.
-func NewUser(username, email, plainPassword string, roleID, bcryptCost int) (*User, error) {
+// Add NewUser insignia fullName, phone, gender
+func NewUser(username, fullName, email, phone, gender, plainPassword string, roleID, bcryptCost int) (*User, error) {
 	username = strings.TrimSpace(username)
 	if username == "" {
 		return nil, ErrEmptyUsername
@@ -80,7 +91,21 @@ func NewUser(username, email, plainPassword string, roleID, bcryptCost int) (*Us
 	if _, err := mail.ParseAddress(email); err != nil {
 		return nil, ErrInvalidEmail
 	}
-
+	// Gender validation (empty strings are allowed, meaning no field is needed)
+	var genderPtr *string
+	if gender != "" {
+		if !ValidGenders[gender] {
+			return nil, ErrInvalidGender
+		}
+		genderPtr = &gender
+	}
+	// phone (empty string is allowed, meaning leave blank)
+	var phonePtr *string
+	if phone != "" {
+		p := strings.TrimSpace(phone)
+		phonePtr = &p
+	}
+	fullName = strings.TrimSpace(fullName)
 	if bcryptCost < bcrypt.MinCost || bcryptCost > bcrypt.MaxCost {
 		bcryptCost = bcrypt.DefaultCost
 	}
@@ -88,10 +113,12 @@ func NewUser(username, email, plainPassword string, roleID, bcryptCost int) (*Us
 	if err != nil {
 		return nil, err
 	}
-
 	return &User{
 		Username:  username,
+		FullName:  fullName,
 		Email:     email,
+		Phone:     phonePtr,
+		Gender:    genderPtr,
 		Password:  string(hash),
 		RoleID:    roleID,
 		CreatedAt: time.Now().UTC(),

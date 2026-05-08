@@ -7,16 +7,32 @@ import (
 // RegisterRequest is the body for POST /auth/register.
 type RegisterRequest struct {
 	Username string `json:"username" validate:"required,min=3,max=25"`
+	FullName string `json:"full_name" validate:"required,min=2,max=100"`
 	Email    string `json:"email" validate:"required,email,max=50"`
+	Phone    string `json:"phone" validate:"omitempty,min=8,max=20"`
+	Gender   string `json:"gender" validate:"omitempty,oneof=male female other"`
 	Password string `json:"password" validate:"required,min=8,max=72,strongpassword"`
 }
 
 func (r RegisterRequest) ToV1Domain() *domain.User {
+	var phone *string
+	if r.Phone != "" {
+		p := r.Phone
+		phone = &p
+	}
+	var gender *string
+	if r.Gender != "" {
+		g := r.Gender
+		gender = &g
+	}
 	return &domain.User{
 		Username: r.Username,
+		FullName: r.FullName,
 		Email:    r.Email,
+		Phone:    phone,
+		Gender:   gender,
 		Password: r.Password,
-		RoleID:   2, // everyone who registers is a regular user
+		RoleID:   2,
 	}
 }
 

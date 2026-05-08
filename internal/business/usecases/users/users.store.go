@@ -54,7 +54,27 @@ func (uc *usecase) Store(ctx context.Context, req StoreRequest) (resp StoreRespo
 		logger.InfoWithContext(ctx, fmt.Sprintf("Lower %s", funcName), fields)
 	}()
 
-	user, buildErr := domain.NewUser(in.Username, in.Email, in.Password, in.RoleID, uc.cfg.BcryptCost)
+	// phone and gender are *strings
+	// you need to dereference them before passing them in, and pass an empty string if they are empty.
+	phone := ""
+	if in.Phone != nil {
+		phone = *in.Phone
+	}
+	gender := ""
+	if in.Gender != nil {
+		gender = *in.Gender
+	}
+
+	user, buildErr := domain.NewUser(
+		in.Username,
+		in.FullName,
+		in.Email,
+		phone,
+		gender,
+		in.Password,
+		in.RoleID,
+		uc.cfg.BcryptCost,
+	)
 	if buildErr != nil {
 		// Domain validation errors (empty fields) are user-facing —
 		// surface them as BadRequest. Anything else (e.g. bcrypt
@@ -62,7 +82,8 @@ func (uc *usecase) Store(ctx context.Context, req StoreRequest) (resp StoreRespo
 		if errors.Is(buildErr, domain.ErrEmptyUsername) ||
 			errors.Is(buildErr, domain.ErrEmptyEmail) ||
 			errors.Is(buildErr, domain.ErrInvalidEmail) ||
-			errors.Is(buildErr, domain.ErrEmptyPassword) {
+			errors.Is(buildErr, domain.ErrEmptyPassword) ||
+			errors.Is(buildErr, domain.ErrInvalidGender) {
 			err = apperror.BadRequest(buildErr.Error())
 		} else {
 			err = apperror.InternalCause(fmt.Errorf("build user: %w", buildErr))

@@ -10,7 +10,10 @@ import (
 type UserResponse struct {
 	Id           string     `json:"id"`
 	Username     string     `json:"username"`
+	FullName     string     `json:"full_name"`
 	Email        string     `json:"email"`
+	Phone        *string    `json:"phone,omitempty"`
+	Gender       *string    `json:"gender,omitempty"`
 	RoleId       int        `json:"role_id"`
 	Token        string     `json:"token,omitempty"`
 	RefreshToken string     `json:"refresh_token,omitempty"`
@@ -36,7 +39,10 @@ func FromV1Domain(u domain.User) UserResponse {
 	return UserResponse{
 		Id:        u.ID,
 		Username:  u.Username,
+		FullName:  u.FullName,
 		Email:     u.Email,
+		Phone:     u.Phone,
+		Gender:    u.Gender,
 		RoleId:    u.RoleID,
 		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
