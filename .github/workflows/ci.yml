@@ -57,7 +57,7 @@ jobs:
       # Configure the `.golangci.yml` file in the corresponding project root directory for golangci-lint
       # Pin the version to prevent CI from failing unexpectedly due to lint tool upgrades
       - name: Static analysis (golangci-lint)
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v7
         with:
           version: v2.1.6
 
