@@ -13,6 +13,20 @@ https://github.com/snykk/go-rest-boilerplate
 
 This project is for learning and technical practice.
 
+It can also be paired with my Kotlin Multiplatform app project to demonstrate a full-stack mobile application architecture.
+
+---
+
+## Related App Client
+
+This backend can be used together with my Kotlin Multiplatform app project:
+
+- [starter-template-refined-kmp](https://github.com/tenSunFree/KmpStarterTemplateRefined)
+
+The app project provides a cross-platform client foundation built with Kotlin Multiplatform, Compose Multiplatform, Clean Architecture, MVI ViewModel, Navigation3, and Koin.
+
+It can serve as the Android / iOS client-side foundation for connecting to RESTful APIs, handling authentication flows, and demonstrating modern shared mobile architecture.
+
 ---
 
 ## Preview
