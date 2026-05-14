@@ -106,6 +106,119 @@ definitions:
     - code
     - email
     type: object
+  responses.CaptionResponse:
+    properties:
+      endMs:
+        example: 70000
+        type: integer
+      id:
+        example: cap_001
+        type: string
+      sortOrder:
+        example: 1
+        type: integer
+      startMs:
+        example: 65000
+        type: integer
+      textEn:
+        example: poetry is not in grand moments
+        type: string
+      textZhTw:
+        example: 詩意不在那些宏大的時刻
+        type: string
+    type: object
+  responses.LessonDetailResponse:
+    properties:
+      captions:
+        items:
+          $ref: '#/definitions/responses.CaptionResponse'
+        type: array
+      captionsVersion:
+        example: 1
+        type: integer
+      lesson:
+        $ref: '#/definitions/responses.LessonListItemResponse'
+      playback:
+        $ref: '#/definitions/responses.LessonPlaybackResponse'
+      vocabularyItems:
+        items:
+          $ref: '#/definitions/responses.VocabularyItemResponse'
+        type: array
+    type: object
+  responses.LessonListItemResponse:
+    properties:
+      category:
+        example: cinephile
+        type: string
+      coverUrl:
+        example: https://example.com/covers/paterson.jpg
+        type: string
+      createdAt:
+        example: "2026-05-14T22:00:00+08:00"
+        type: string
+      description:
+        example: 透過電影片段學習自然英文表達。
+        type: string
+      durationMs:
+        example: 279000
+        type: integer
+      id:
+        example: paterson_001
+        type: string
+      isFree:
+        example: true
+        type: boolean
+      level:
+        example: intermediate
+        type: string
+      subtitle:
+        example: FUNDAY英語學院 - 專業線上英文教學
+        type: string
+      tags:
+        example:
+        - movie
+        - poetry
+        - daily-life
+        items:
+          type: string
+        type: array
+      title:
+        example: FUNDAY Cinephile 電影迷 | Paterson 派特森
+        type: string
+      updatedAt:
+        example: "2026-05-14T22:00:00+08:00"
+        type: string
+      viewCount:
+        example: 1166
+        type: integer
+    type: object
+  responses.LessonPlaybackResponse:
+    properties:
+      allowPlaybackSpeed:
+        example: true
+        type: boolean
+      allowSeek:
+        example: true
+        type: boolean
+      durationMs:
+        example: 279000
+        type: integer
+      hlsUrl:
+        example: https://cdn.example.com/videos/paterson.m3u8
+        type: string
+      startAtMs:
+        example: 0
+        type: integer
+      videoProvider:
+        example: youtube
+        type: string
+      videoUrl:
+        example: https://cdn.example.com/videos/paterson.mp4
+        type: string
+      youtubeVideoId:
+        example: abc123xyz
+        type: string
+    type: object
   responses.UserResponse:
     properties:
       created_at:
@@ -130,6 +243,49 @@ definitions:
         type: string
       username:
         type: string
+    type: object
+  responses.VocabularyExampleResponse:
+    properties:
+      en:
+        example: That loud crash scared the daylights out of me.
+        type: string
+      zhTw:
+        example: 那一聲巨響把我嚇壞了。
+        type: string
+    type: object
+  responses.VocabularyItemResponse:
+    properties:
+      captionId:
+        example: cap_003
+        type: string
+      definitionEn:
+        example: normal or everyday moments
+        type: string
+      definitionZhTw:
+        example: 平凡的瞬間
+        type: string
+      endMs:
+        example: 35000
+        type: integer
+      examples:
+        items:
+          $ref: '#/definitions/responses.VocabularyExampleResponse'
+        type: array
+      id:
+        example: voc_001
+        type: string
+      level:
+        example: A2
+        type: string
+      noteZhTw:
+        example: ones 代替前面的 moments，避免重複。
+        type: string
+      phrase:
+        example: ordinary ones
+        type: string
+      startMs:
+        example: 20000
+        type: integer
     type: object
   v1.BaseResponse:
     properties:
@@ -502,6 +658,58 @@ paths:
       summary: Verify an OTP code and activate the account
       tags:
       - auth
+  /lessons:
+    get:
+      description: Returns all published video lessons for the home/list page.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/v1.BaseResponse'
+            - properties:
+                data:
+                  additionalProperties:
+                    items:
+                      $ref: '#/definitions/responses.LessonListItemResponse'
+                    type: array
+                  type: object
+              type: object
+      summary: 影片列表 / Get lesson list
+      tags:
+      - lessons
+  /lessons/{lessonId}:
+    get:
+      description: 'Returns full lesson data: lesson info, playback config, time-synced
+        captions (startMs/endMs), and vocabulary teaching items. Flutter calls this
+        once when entering the playback screen.'
+      parameters:
+      - description: Lesson ID (e.g. paterson_001)
+        in: path
+        name: lessonId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/v1.BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/responses.LessonDetailResponse'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.BaseResponse'
+      summary: 影片詳情 / Get lesson detail
+      tags:
+      - lessons
   /users/me:
     get:
       description: Reads the authenticated user from the JWT in the Authorization

@@ -544,6 +544,91 @@ const docTemplate = `{
                 }
             }
         },
+        "/lessons": {
+            "get": {
+                "description": "Returns all published video lessons for the home/list page.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "影片列表 / Get lesson list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/responses.LessonListItemResponse"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/lessons/{lessonId}": {
+            "get": {
+                "description": "Returns full lesson data: lesson info, playback config, time-synced captions (startMs/endMs), and vocabulary teaching items. Flutter calls this once when entering the playback screen.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "影片詳情 / Get lesson detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Lesson ID (e.g. paterson_001)",
+                        "name": "lessonId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/responses.LessonDetailResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/users/me": {
             "get": {
                 "security": [
@@ -743,6 +828,163 @@ const docTemplate = `{
                 }
             }
         },
+        "responses.CaptionResponse": {
+            "type": "object",
+            "properties": {
+                "endMs": {
+                    "type": "integer",
+                    "example": 70000
+                },
+                "id": {
+                    "type": "string",
+                    "example": "cap_001"
+                },
+                "sortOrder": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "startMs": {
+                    "type": "integer",
+                    "example": 65000
+                },
+                "textEn": {
+                    "type": "string",
+                    "example": "poetry is not in grand moments"
+                },
+                "textZhTw": {
+                    "type": "string",
+                    "example": "詩意不在那些宏大的時刻"
+                }
+            }
+        },
+        "responses.LessonDetailResponse": {
+            "type": "object",
+            "properties": {
+                "captions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responses.CaptionResponse"
+                    }
+                },
+                "captionsVersion": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "lesson": {
+                    "$ref": "#/definitions/responses.LessonListItemResponse"
+                },
+                "playback": {
+                    "$ref": "#/definitions/responses.LessonPlaybackResponse"
+                },
+                "vocabularyItems": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responses.VocabularyItemResponse"
+                    }
+                }
+            }
+        },
+        "responses.LessonListItemResponse": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "example": "cinephile"
+                },
+                "coverUrl": {
+                    "type": "string",
+                    "example": "https://example.com/covers/paterson.jpg"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "example": "2026-05-14T22:00:00+08:00"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "透過電影片段學習自然英文表達。"
+                },
+                "durationMs": {
+                    "type": "integer",
+                    "example": 279000
+                },
+                "id": {
+                    "type": "string",
+                    "example": "paterson_001"
+                },
+                "isFree": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "level": {
+                    "type": "string",
+                    "example": "intermediate"
+                },
+                "subtitle": {
+                    "type": "string",
+                    "example": "FUNDAY英語學院 - 專業線上英文教學"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "movie",
+                        "poetry",
+                        "daily-life"
+                    ]
+                },
+                "title": {
+                    "type": "string",
+                    "example": "FUNDAY Cinephile 電影迷 | Paterson 派特森"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "example": "2026-05-14T22:00:00+08:00"
+                },
+                "viewCount": {
+                    "type": "integer",
+                    "example": 1166
+                }
+            }
+        },
+        "responses.LessonPlaybackResponse": {
+            "type": "object",
+            "properties": {
+                "allowPlaybackSpeed": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "allowSeek": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "durationMs": {
+                    "type": "integer",
+                    "example": 279000
+                },
+                "hlsUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/videos/paterson.m3u8"
+                },
+                "startAtMs": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "videoProvider": {
+                    "type": "string",
+                    "example": "youtube"
+                },
+                "videoUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/videos/paterson.mp4"
+                },
+                "youtubeVideoId": {
+                    "type": "string",
+                    "example": "abc123xyz"
+                }
+            }
+        },
         "responses.UserResponse": {
             "type": "object",
             "properties": {
@@ -778,6 +1020,66 @@ const docTemplate = `{
                 },
                 "username": {
                     "type": "string"
+                }
+            }
+        },
+        "responses.VocabularyExampleResponse": {
+            "type": "object",
+            "properties": {
+                "en": {
+                    "type": "string",
+                    "example": "That loud crash scared the daylights out of me."
+                },
+                "zhTw": {
+                    "type": "string",
+                    "example": "那一聲巨響把我嚇壞了。"
+                }
+            }
+        },
+        "responses.VocabularyItemResponse": {
+            "type": "object",
+            "properties": {
+                "captionId": {
+                    "type": "string",
+                    "example": "cap_003"
+                },
+                "definitionEn": {
+                    "type": "string",
+                    "example": "normal or everyday moments"
+                },
+                "definitionZhTw": {
+                    "type": "string",
+                    "example": "平凡的瞬間"
+                },
+                "endMs": {
+                    "type": "integer",
+                    "example": 35000
+                },
+                "examples": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responses.VocabularyExampleResponse"
+                    }
+                },
+                "id": {
+                    "type": "string",
+                    "example": "voc_001"
+                },
+                "level": {
+                    "type": "string",
+                    "example": "A2"
+                },
+                "noteZhTw": {
+                    "type": "string",
+                    "example": "ones 代替前面的 moments，避免重複。"
+                },
+                "phrase": {
+                    "type": "string",
+                    "example": "ordinary ones"
+                },
+                "startMs": {
+                    "type": "integer",
+                    "example": 20000
                 }
             }
         },

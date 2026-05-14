@@ -131,6 +131,7 @@ func NewApp() (*App, error) {
 	api.GET("/", routes.RootHandler)
 	routes.NewAuthRoute(api, authUC, authMiddleware).Routes()
 	routes.NewUsersRoute(api, usersUC, authMiddleware).Routes()
+	routes.NewLessonsRoute(api).Routes()
 
 	// setup http server
 	server := &http.Server{
