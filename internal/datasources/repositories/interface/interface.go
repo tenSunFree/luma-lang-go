@@ -15,6 +15,7 @@ import (
 	"context"
 
 	"github.com/snykk/go-rest-boilerplate/internal/business/domain"
+	"github.com/snykk/go-rest-boilerplate/internal/datasources/records"
 )
 
 // UserListFilter narrows down UserRepository.List() results. Each
@@ -55,4 +56,12 @@ type UserRepository interface {
 	// for audit/restore but stops matching default queries. Returns
 	// apperror.NotFound if the row doesn't exist or is already deleted.
 	SoftDelete(ctx context.Context, id string) error
+}
+
+// LessonRepository is the gateway for reading and writing lessons data.
+// Upsert allows existing data to be safely updated when the imported script is rerun.
+type LessonRepository interface {
+	List(ctx context.Context) ([]records.Lesson, error)
+	GetByID(ctx context.Context, id string) (records.Lesson, error)
+	Upsert(ctx context.Context, lesson records.Lesson) error
 }

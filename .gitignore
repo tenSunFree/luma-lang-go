@@ -18,4 +18,6 @@ coverage.html
 .idea/
 *.iml
 
-/
+# Environment variables
+.env
+internal/config/.env
