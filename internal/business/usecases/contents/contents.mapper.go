@@ -2,6 +2,7 @@ package contents
 
 import (
 	"encoding/json"
+
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/records"
 	"github.com/snykk/go-rest-boilerplate/internal/http/datatransfers/responses"
 )

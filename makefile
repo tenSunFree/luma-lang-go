@@ -87,3 +87,6 @@ generate-contents-json:
 
 import-contents:
 	go run cmd/import_contents/main.go -file data/contents.json
+
+check: ## Run local quality checks
+	bash scripts/check.sh

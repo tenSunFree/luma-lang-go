@@ -3,10 +3,11 @@ package contents
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	"github.com/snykk/go-rest-boilerplate/internal/apperror"
 	repointerface "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/interface"
 	"github.com/snykk/go-rest-boilerplate/internal/http/datatransfers/responses"
-	"strings"
 )
 
 func (uc *usecase) Search(ctx context.Context, req SearchRequest) (ListResult, error) {

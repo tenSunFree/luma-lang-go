@@ -3,6 +3,7 @@ package contents
 import (
 	"context"
 	"fmt"
+
 	"github.com/snykk/go-rest-boilerplate/internal/apperror"
 	"github.com/snykk/go-rest-boilerplate/internal/http/datatransfers/responses"
 )

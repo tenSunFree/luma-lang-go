@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/records"
 	"github.com/snykk/go-rest-boilerplate/pkg/logger"
 )

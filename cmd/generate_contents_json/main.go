@@ -59,7 +59,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("marshal: %w", err))
 	}
-	if err := os.WriteFile("data/contents.json", out, 0644); err != nil {
+	if err := os.WriteFile("data/contents.json", out, 0o600); err != nil {
 		panic(fmt.Errorf("write contents.json: %w", err))
 	}
 	fmt.Printf("✅  generated data/contents.json  (%d entries)\n", len(result))

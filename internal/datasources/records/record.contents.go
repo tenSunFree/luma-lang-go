@@ -2,8 +2,9 @@ package records
 
 import (
 	"encoding/json"
-	"github.com/lib/pq"
 	"time"
+
+	"github.com/lib/pq"
 )
 
 type Content struct {

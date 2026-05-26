@@ -1,12 +1,13 @@
 package contents
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	contentsuc "github.com/snykk/go-rest-boilerplate/internal/business/usecases/contents"
 	v1 "github.com/snykk/go-rest-boilerplate/internal/http/handlers/v1"
 	"github.com/snykk/go-rest-boilerplate/pkg/logger"
-	"net/http"
-	"strconv"
 )
 
 type Handler struct {

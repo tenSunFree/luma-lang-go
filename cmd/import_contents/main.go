@@ -4,6 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"flag"
+	"os"
+	"time"
+
 	"github.com/lib/pq"
 	"github.com/snykk/go-rest-boilerplate/internal/config"
 	"github.com/snykk/go-rest-boilerplate/internal/constants"
@@ -12,8 +15,6 @@ import (
 	contentspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/contents"
 	"github.com/snykk/go-rest-boilerplate/internal/http/datatransfers/responses"
 	"github.com/snykk/go-rest-boilerplate/pkg/logger"
-	"os"
-	"time"
 )
 
 type ContentImportItem struct {
