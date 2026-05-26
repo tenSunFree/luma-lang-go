@@ -43,7 +43,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest"
+                            "$ref": "#/definitions/requests.LoginRequest"
                         }
                     }
                 ],
@@ -53,13 +53,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -69,25 +69,25 @@ const docTemplate = `{
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Invalid email or password",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account not yet activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -113,7 +113,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
+                            "$ref": "#/definitions/requests.RefreshRequest"
                         }
                     }
                 ],
@@ -121,19 +121,19 @@ const docTemplate = `{
                     "200": {
                         "description": "Logged out",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Refresh token invalid",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -164,7 +164,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest"
+                            "$ref": "#/definitions/requests.ChangePasswordRequest"
                         }
                     }
                 ],
@@ -172,25 +172,25 @@ const docTemplate = `{
                     "200": {
                         "description": "Password changed",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Current password incorrect",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -216,7 +216,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest"
+                            "$ref": "#/definitions/requests.ForgotPasswordRequest"
                         }
                     }
                 ],
@@ -224,19 +224,19 @@ const docTemplate = `{
                     "200": {
                         "description": "Reset email queued (or email not registered — same response either way)",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -262,7 +262,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest"
+                            "$ref": "#/definitions/requests.ResetPasswordRequest"
                         }
                     }
                 ],
@@ -270,25 +270,25 @@ const docTemplate = `{
                     "200": {
                         "description": "Password reset",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Reset token invalid or expired",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -314,7 +314,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
+                            "$ref": "#/definitions/requests.RefreshRequest"
                         }
                     }
                 ],
@@ -324,13 +324,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -340,19 +340,19 @@ const docTemplate = `{
                     "401": {
                         "description": "Refresh token invalid, expired, or already revoked",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account no longer active",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -378,7 +378,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest"
+                            "$ref": "#/definitions/requests.RegisterRequest"
                         }
                     }
                 ],
@@ -388,13 +388,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -404,25 +404,25 @@ const docTemplate = `{
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "409": {
                         "description": "Email or username already in use",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error (per-field detail in data.errors)",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Internal error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -448,7 +448,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest"
+                            "$ref": "#/definitions/requests.SendOTPRequest"
                         }
                     }
                 ],
@@ -456,31 +456,31 @@ const docTemplate = `{
                     "200": {
                         "description": "OTP enqueued",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Account already activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Failed to enqueue mail",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -506,7 +506,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest"
+                            "$ref": "#/definitions/requests.VerifyOTPRequest"
                         }
                     }
                 ],
@@ -514,89 +514,144 @@ const docTemplate = `{
                     "200": {
                         "description": "Account activated",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid OTP code",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Locked out — too many invalid attempts",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
             }
         },
-        "/lessons": {
+        "/contents": {
             "get": {
-                "description": "Returns all published video lessons for the home/list page.",
+                "description": "以 type 區分內容類型，支援分頁。type 為空時回傳所有類型。",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "lessons"
+                    "contents"
                 ],
-                "summary": "影片列表 / Get lesson list",
+                "summary": "內容列表 / Get content list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "video | music | fairy_tale | column | supplement",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "頁碼 (default: 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每頁筆數 (default: 20, max: 100)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": {
-                                                "type": "array",
-                                                "items": {
-                                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonListItemResponse"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
             }
         },
-        "/lessons/{lessonId}": {
+        "/contents/search": {
             "get": {
-                "description": "Returns full lesson data: lesson info, playback config, time-synced captions (startMs/endMs), and vocabulary teaching items. Flutter calls this once when entering the playback screen.",
+                "description": "跨 title/subtitle/description/category 的關鍵字搜尋，可選擇限縮 type。",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "lessons"
+                    "contents"
                 ],
-                "summary": "影片詳情 / Get lesson detail",
+                "summary": "搜尋內容 / Search contents",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Lesson ID (e.g. starbucks_001)",
-                        "name": "lessonId",
+                        "description": "搜尋關鍵字",
+                        "name": "q",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "限縮類型（選填）",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "頁碼 (default: 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每頁筆數 (default: 20, max: 100)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/v1.BaseResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "q is required",
+                        "schema": {
+                            "$ref": "#/definitions/v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/contents/{contentId}": {
+            "get": {
+                "description": "回傳完整內容資料：基本資訊、播放設定、字幕、單字。",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contents"
+                ],
+                "summary": "內容詳情 / Get content detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Content ID (e.g. video_starbucks_001)",
+                        "name": "contentId",
                         "in": "path",
                         "required": true
                     }
@@ -605,25 +660,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonDetailResponse"
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -650,13 +693,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                    "$ref": "#/definitions/v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
+                                            "$ref": "#/definitions/responses.UserResponse"
                                         }
                                     }
                                 }
@@ -666,13 +709,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Missing or invalid token",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "User no longer exists",
                         "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                            "$ref": "#/definitions/v1.BaseResponse"
                         }
                     }
                 }
@@ -680,7 +723,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest": {
+        "requests.ChangePasswordRequest": {
             "type": "object",
             "required": [
                 "current_password",
@@ -699,7 +742,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest": {
+        "requests.ForgotPasswordRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -711,7 +754,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest": {
+        "requests.LoginRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -729,7 +772,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest": {
+        "requests.RefreshRequest": {
             "type": "object",
             "required": [
                 "refresh_token"
@@ -740,7 +783,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest": {
+        "requests.RegisterRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -783,7 +826,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest": {
+        "requests.ResetPasswordRequest": {
             "type": "object",
             "required": [
                 "new_password",
@@ -800,7 +843,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest": {
+        "requests.SendOTPRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -812,7 +855,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest": {
+        "requests.VerifyOTPRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -828,164 +871,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.CaptionResponse": {
-            "type": "object",
-            "properties": {
-                "endMs": {
-                    "type": "integer",
-                    "example": 70000
-                },
-                "id": {
-                    "type": "string",
-                    "example": "cap_001"
-                },
-                "sortOrder": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "startMs": {
-                    "type": "integer",
-                    "example": 65000
-                },
-                "textEn": {
-                    "type": "string",
-                    "example": "poetry is not in grand moments"
-                },
-                "textZhTw": {
-                    "type": "string",
-                    "example": "詩意不在那些宏大的時刻"
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonDetailResponse": {
-            "type": "object",
-            "properties": {
-                "captions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.CaptionResponse"
-                    }
-                },
-                "captionsVersion": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "lesson": {
-                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonListItemResponse"
-                },
-                "playback": {
-                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonPlaybackResponse"
-                },
-                "vocabularyItems": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.VocabularyItemResponse"
-                    }
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonListItemResponse": {
-            "type": "object",
-            "properties": {
-                "category": {
-                    "type": "string",
-                    "example": "cinephile"
-                },
-                "coverUrl": {
-                    "type": "string",
-                    "example": "https://example.com/covers/paterson.jpg"
-                },
-                "createdAt": {
-                    "type": "string",
-                    "example": "2026-05-14T22:00:00+08:00"
-                },
-                "description": {
-                    "type": "string",
-                    "example": "透過電影片段學習自然英文表達。"
-                },
-                "durationMs": {
-                    "type": "integer",
-                    "example": 279000
-                },
-                "id": {
-                    "type": "string",
-                    "example": "paterson_001"
-                },
-                "isFree": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "level": {
-                    "type": "string",
-                    "example": "intermediate"
-                },
-                "subtitle": {
-                    "type": "string",
-                    "example": "FUNDAY英語學院 - 專業線上英文教學"
-                },
-                "tags": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "movie",
-                        "poetry",
-                        "daily-life"
-                    ]
-                },
-                "title": {
-                    "type": "string",
-                    "example": "FUNDAY Cinephile 電影迷 | Paterson 派特森"
-                },
-                "updatedAt": {
-                    "type": "string",
-                    "example": "2026-05-14T22:00:00+08:00"
-                },
-                "viewCount": {
-                    "type": "integer",
-                    "example": 1166
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LessonPlaybackResponse": {
-            "type": "object",
-            "properties": {
-                "allowPlaybackSpeed": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "allowSeek": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "durationMs": {
-                    "type": "integer",
-                    "example": 279000
-                },
-                "hlsUrl": {
-                    "type": "string",
-                    "example": "https://cdn.example.com/videos/paterson.m3u8"
-                },
-                "startAtMs": {
-                    "type": "integer",
-                    "example": 0
-                },
-                "videoProvider": {
-                    "type": "string",
-                    "example": "youtube"
-                },
-                "videoUrl": {
-                    "type": "string",
-                    "example": "https://cdn.example.com/videos/paterson.mp4"
-                },
-                "youtubeVideoId": {
-                    "type": "string",
-                    "example": "abc123xyz"
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse": {
+        "responses.UserResponse": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -1023,67 +909,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.VocabularyExampleResponse": {
-            "type": "object",
-            "properties": {
-                "en": {
-                    "type": "string",
-                    "example": "That loud crash scared the daylights out of me."
-                },
-                "zhTw": {
-                    "type": "string",
-                    "example": "那一聲巨響把我嚇壞了。"
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.VocabularyItemResponse": {
-            "type": "object",
-            "properties": {
-                "captionId": {
-                    "type": "string",
-                    "example": "cap_003"
-                },
-                "definitionEn": {
-                    "type": "string",
-                    "example": "normal or everyday moments"
-                },
-                "definitionZhTw": {
-                    "type": "string",
-                    "example": "平凡的瞬間"
-                },
-                "endMs": {
-                    "type": "integer",
-                    "example": 35000
-                },
-                "examples": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.VocabularyExampleResponse"
-                    }
-                },
-                "id": {
-                    "type": "string",
-                    "example": "voc_001"
-                },
-                "level": {
-                    "type": "string",
-                    "example": "A2"
-                },
-                "noteZhTw": {
-                    "type": "string",
-                    "example": "ones 代替前面的 moments，避免重複。"
-                },
-                "phrase": {
-                    "type": "string",
-                    "example": "ordinary ones"
-                },
-                "startMs": {
-                    "type": "integer",
-                    "example": 20000
-                }
-            }
-        },
-        "github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse": {
+        "v1.BaseResponse": {
             "type": "object",
             "properties": {
                 "data": {},

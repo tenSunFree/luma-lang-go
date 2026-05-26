@@ -58,6 +58,26 @@ type UserRepository interface {
 	SoftDelete(ctx context.Context, id string) error
 }
 
+// ContentListFilter filter condition. An empty field means "do not filter this dimension".
+type ContentListFilter struct {
+	Type  string // Empty string = all types
+	Query string // Empty string = No search
+}
+
+// ContentRepository is the gateway for reading and writing all content types.
+// A single table (contents), distinguished by the content_type column:
+// video / music / fairy_tale / column / supplement
+type ContentRepository interface {
+	// Filter the List by filter.Type, supporting offset/limit pagination
+	// Also returns the total number of records that meet the criteria, allowing the frontend to calculate the total number of pages.
+	List(ctx context.Context, filter ContentListFilter, offset, limit int) ([]records.Content, int, error)
+	// Search across title/subtitle/description/category using ILIKE, which can be narrowed down using filter.Type
+	// Also returns the total number of entries matching the criteria
+	Search(ctx context.Context, filter ContentListFilter, offset, limit int) ([]records.Content, int, error)
+	GetByID(ctx context.Context, id string) (records.Content, error)
+	Upsert(ctx context.Context, content records.Content) error
+}
+
 // LessonRepository is the gateway for reading and writing lessons data.
 // Upsert allows existing data to be safely updated when the imported script is rerun.
 type LessonRepository interface {

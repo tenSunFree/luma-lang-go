@@ -14,13 +14,13 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/snykk/go-rest-boilerplate/internal/business/usecases/auth"
-	lessonsuc "github.com/snykk/go-rest-boilerplate/internal/business/usecases/lessons"
+	contentsuc "github.com/snykk/go-rest-boilerplate/internal/business/usecases/contents"
 	"github.com/snykk/go-rest-boilerplate/internal/business/usecases/users"
 	"github.com/snykk/go-rest-boilerplate/internal/config"
 	"github.com/snykk/go-rest-boilerplate/internal/constants"
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/caches"
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/drivers"
-	lessonspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/lessons"
+	contentspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/contents"
 	userspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/users"
 	V1Handler "github.com/snykk/go-rest-boilerplate/internal/http/handlers/v1"
 	"github.com/snykk/go-rest-boilerplate/internal/http/middlewares"
@@ -133,9 +133,9 @@ func NewApp() (*App, error) {
 	api.GET("/", routes.RootHandler)
 	routes.NewAuthRoute(api, authUC, authMiddleware).Routes()
 	routes.NewUsersRoute(api, usersUC, authMiddleware).Routes()
-	lessonRepo := lessonspostgres.NewLessonRepository(conn)
-	lessonsUC := lessonsuc.NewUsecase(lessonRepo)
-	routes.NewLessonsRoute(api, lessonsUC).Routes()
+	contentRepo := contentspostgres.NewContentRepository(conn)
+	contentsUC := contentsuc.NewUsecase(contentRepo)
+	routes.NewContentsRoute(api, contentsUC).Routes()
 
 	// setup http server
 	server := &http.Server{

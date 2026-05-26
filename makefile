@@ -84,3 +84,9 @@ ci-build: ## Build API binary matching CI build job
 
 import-lessons: ## Import lessons from data/lessons.json into PostgreSQL
 	go run cmd/import_lessons/main.go -file data/lessons.json
+
+generate-contents-json:
+	go run cmd/generate_contents_json/main.go
+
+import-contents:
+	go run cmd/import_contents/main.go -file data/contents.json
