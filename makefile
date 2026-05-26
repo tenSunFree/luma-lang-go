@@ -82,9 +82,6 @@ ci-swag-check: ## Verify docs/ is in sync with handler annotations
 ci-build: ## Build API binary matching CI build job
 	go build -o bin/api ./cmd/api/main.go
 
-import-lessons: ## Import lessons from data/lessons.json into PostgreSQL
-	go run cmd/import_lessons/main.go -file data/lessons.json
-
 generate-contents-json:
 	go run cmd/generate_contents_json/main.go
 
