@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
 )
 
 type oldItem struct {
@@ -23,8 +22,6 @@ type newItem struct {
 	VocabularyItems []map[string]interface{} `json:"vocabularyItems"`
 }
 
-var contentTypes = []string{"video", "music", "fairy_tale", "column", "supplement"}
-
 func main() {
 	raw, err := os.ReadFile("data/lessons.json")
 	if err != nil {
@@ -34,26 +31,23 @@ func main() {
 	if err := json.Unmarshal(raw, &lessons); err != nil {
 		panic(fmt.Errorf("parse lessons.json: %w", err))
 	}
-	result := make([]newItem, 0, len(lessons)*len(contentTypes))
+	result := make([]newItem, 0, len(lessons))
 	for _, lesson := range lessons {
-		oldID, _ := lesson.Lesson["id"].(string)
-		for _, ct := range contentTypes {
-			content := copyMap(lesson.Lesson)
-			content["type"] = ct
-			// Add a type prefix to the ID to avoid conflicts between 5 types.
-			content["id"] = fmt.Sprintf("%s_%s", ct, oldID)
-			// Adding a prefix to the title makes it easier to test and identify
-			if title, ok := content["title"].(string); ok {
-				content["title"] = fmt.Sprintf("[%s] %s", strings.ToUpper(ct), title)
-			}
-			result = append(result, newItem{
-				Content:         content,
-				Playback:        lesson.Playback,
-				CaptionsVersion: lesson.CaptionsVersion,
-				Captions:        lesson.Captions,
-				VocabularyItems: lesson.VocabularyItems,
-			})
+		content := copyMap(lesson.Lesson)
+		// Read lesson.type to determine content.type
+		// If no type is set, the default is "video"
+		contentType, _ := content["type"].(string)
+		if contentType == "" {
+			contentType = "video"
 		}
+		content["type"] = contentType
+		result = append(result, newItem{
+			Content:         content,
+			Playback:        lesson.Playback,
+			CaptionsVersion: lesson.CaptionsVersion,
+			Captions:        lesson.Captions,
+			VocabularyItems: lesson.VocabularyItems,
+		})
 	}
 	out, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {

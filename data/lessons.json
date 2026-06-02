@@ -1,8 +1,9 @@
 [
   {
     "lesson": {
-      "id": "starbucks_001",
-      "title": "Starbucks Coffee Vocabulary",
+      "id": "video_001",
+      "type": "video",
+      "title": "video_001 title",
       "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
       "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
       "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
@@ -211,11 +212,12 @@
   },
   {
     "lesson": {
-      "id": "starbucks_002",
-      "title": "Starbucks Coffee Vocabulary",
+      "id": "video_002",
+      "type": "video",
+      "title": "video_002 title",
       "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
-      "description": "透過星巴克情境學習咖啡點餐與日常英文表達。",
-      "coverUrl": "https://cdn.zekkei-japan.jp/images/articles/ef4f61494519692aa5ccb95d213a3e1b.jpg",
+      "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
+      "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
       "durationMs": 568000,
       "level": "beginner",
       "category": "daily-english",
@@ -241,7 +243,1130 @@
       "allowPlaybackSpeed": true
     },
     "captionsVersion": 1,
-    "captions": [],
-    "vocabularyItems": []
+    "captions": [
+      {
+        "id": "cap_001",
+        "sortOrder": 1,
+        "startMs": 0,
+        "endMs": 6000,
+        "textEn": "Hey guys! It's Ariannita la Gringa and welcome back to my YouTube channel. Can you guys guess",
+        "textZhTw": "嗨大家！我是 Ariannita la Gringa，歡迎回到我的 YouTube 頻道。你們猜得到嗎"
+      },
+      {
+        "id": "cap_002",
+        "sortOrder": 2,
+        "startMs": 6000,
+        "endMs": 12000,
+        "textEn": "where I'm at today? Today I'm at Starbucks and as you can see behind me you can see",
+        "textZhTw": "我今天在哪裡嗎？今天我在星巴克，而且你們可以看到我後面有"
+      },
+      {
+        "id": "cap_003",
+        "sortOrder": 3,
+        "startMs": 12000,
+        "endMs": 18000,
+        "textEn": "the beautiful Starbucks logo that they have. And this logo is famous worldwide. You all",
+        "textZhTw": "他們漂亮的星巴克標誌。這個標誌在全世界都很有名。你們大家"
+      },
+      {
+        "id": "cap_004",
+        "sortOrder": 4,
+        "startMs": 18000,
+        "endMs": 25000,
+        "textEn": "might be wondering... Ariannita why are you at Starbucks? Well today I'm at Starbucks because I",
+        "textZhTw": "可能會想說……Ariannita，妳為什麼在星巴克？其實今天我在星巴克是因為我"
+      },
+      {
+        "id": "cap_005",
+        "sortOrder": 5,
+        "startMs": 25000,
+        "endMs": 31000,
+        "textEn": "want to teach you guys some coffee vocabulary. And you guys might be wondering... Wait it's",
+        "textZhTw": "想教你們一些咖啡相關的單字。你們可能會想說……等等，這不是"
+      },
+      {
+        "id": "cap_006",
+        "sortOrder": 6,
+        "startMs": 31000,
+        "endMs": 35000,
+        "textEn": "really easy to order coffee... Actually, it can be pretty difficult especially at",
+        "textZhTw": "點咖啡很簡單嗎……其實，點咖啡可能滿難的，尤其是在"
+      },
+      {
+        "id": "cap_007",
+        "sortOrder": 7,
+        "startMs": 35000,
+        "endMs": 41000,
+        "textEn": "Starbucks because they have different sizes, different coffee, and different drinks all",
+        "textZhTw": "星巴克，因為他們有不同尺寸、不同咖啡，還有各種不同飲品"
+      },
+      {
+        "id": "cap_008",
+        "sortOrder": 8,
+        "startMs": 41000,
+        "endMs": 49000,
+        "textEn": "together. So come along with me and let's go learn some English vocab inside Starbucks.",
+        "textZhTw": "全部混在一起。所以跟我一起來吧，我們進星巴克學一些英文單字。"
+      },
+      {
+        "id": "cap_009",
+        "sortOrder": 9,
+        "startMs": 49000,
+        "endMs": 55000,
+        "textEn": "Before walking inside this Starbucks store I want to teach you guys some facts about Starbucks.",
+        "textZhTw": "在走進這間星巴克之前，我想先教你們一些關於星巴克的小知識。"
+      },
+      {
+        "id": "cap_010",
+        "sortOrder": 10,
+        "startMs": 55000,
+        "endMs": 66000,
+        "textEn": "The first original Starbucks opened in 1971 in Seattle, Washington. And there are over 33,833",
+        "textZhTw": "第一間星巴克在 1971 年於華盛頓州西雅圖開幕。而全球目前有超過 33,833"
+      },
+      {
+        "id": "cap_011",
+        "sortOrder": 11,
+        "startMs": 66000,
+        "endMs": 72000,
+        "textEn": "stores worldwide. 15,000 of those stores are located right in the United States of America.",
+        "textZhTw": "間門市。其中有 15,000 間門市就位在美國。"
+      }
+    ],
+    "vocabularyItems": [
+      {
+        "id": "voc_001",
+        "captionId": "cap_005",
+        "startMs": 25000,
+        "endMs": 31000,
+        "phrase": "coffee vocabulary",
+        "definitionEn": "words and phrases related to coffee",
+        "definitionZhTw": "與咖啡相關的單字和片語",
+        "noteZhTw": "vocabulary 是「單字、詞彙」的意思，可以用在各種主題，例如 coffee vocabulary、business vocabulary。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Today I want to teach you some coffee vocabulary.",
+            "zhTw": "今天我想教你一些咖啡相關的單字。"
+          }
+        ]
+      },
+      {
+        "id": "voc_002",
+        "captionId": "cap_006",
+        "startMs": 31000,
+        "endMs": 35000,
+        "phrase": "pretty difficult",
+        "definitionEn": "quite difficult or a little difficult",
+        "definitionZhTw": "相當困難、有點難",
+        "noteZhTw": "pretty 在口語裡常用來表示「滿、相當」，不是只有「漂亮」的意思。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Ordering coffee can be pretty difficult.",
+            "zhTw": "點咖啡可能會滿難的。"
+          }
+        ]
+      },
+      {
+        "id": "voc_003",
+        "captionId": "cap_008",
+        "startMs": 41000,
+        "endMs": 49000,
+        "phrase": "come along with me",
+        "definitionEn": "come with me",
+        "definitionZhTw": "跟我一起來",
+        "noteZhTw": "come along with me 是影片、旅遊、Vlog 裡很常見的自然說法。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Come along with me and let's learn some English.",
+            "zhTw": "跟我一起來，我們來學一些英文。"
+          }
+        ]
+      },
+      {
+        "id": "voc_004",
+        "captionId": "cap_009",
+        "startMs": 49000,
+        "endMs": 55000,
+        "phrase": "facts about Starbucks",
+        "definitionEn": "information or true details about something",
+        "definitionZhTw": "關於某件事的事實或資訊",
+        "noteZhTw": "facts about something 表示「關於某事的事實／小知識」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "I want to teach you some facts about Starbucks.",
+            "zhTw": "我想教你一些關於星巴克的小知識。"
+          }
+        ]
+      },
+      {
+        "id": "voc_005",
+        "captionId": "cap_011",
+        "startMs": 66000,
+        "endMs": 72000,
+        "phrase": "worldwide",
+        "definitionEn": "around the world",
+        "definitionZhTw": "全世界、全球",
+        "noteZhTw": "worldwide 可以當副詞或形容詞，表示「全球的／在全世界」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "There are Starbucks stores worldwide.",
+            "zhTw": "全球都有星巴克門市。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson": {
+      "id": "music_001",
+      "type": "music",
+      "title": "music_001 title",
+      "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
+      "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
+      "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
+      "durationMs": 284000,
+      "level": "beginner",
+      "category": "daily-english",
+      "tags": [
+        "coffee",
+        "starbucks",
+        "daily-life",
+        "vocabulary"
+      ],
+      "isFree": true,
+      "viewCount": 0,
+      "createdAt": "2026-05-20T18:50:00+08:00",
+      "updatedAt": "2026-05-20T18:50:00+08:00"
+    },
+    "playback": {
+      "videoProvider": "youtube",
+      "youtubeVideoId": "hLQl3WQQoQ0",
+      "videoUrl": "https://www.youtube.com/watch?v=hLQl3WQQoQ0",
+      "hlsUrl": "",
+      "durationMs": 284000,
+      "startAtMs": 0,
+      "allowSeek": true,
+      "allowPlaybackSpeed": true
+    },
+    "captionsVersion": 1,
+    "captions": [
+      {
+        "id": "cap_001",
+        "sortOrder": 1,
+        "startMs": 15000,
+        "endMs": 22000,
+        "textEn": "I heard that you're settled down",
+        "textZhTw": "我聽說你已安定下來"
+      },
+      {
+        "id": "cap_002",
+        "sortOrder": 2,
+        "startMs": 22000,
+        "endMs": 26000,
+        "textEn": "That you found a girl",
+        "textZhTw": "你找到了一個女孩"
+      },
+      {
+        "id": "cap_003",
+        "sortOrder": 3,
+        "startMs": 26000,
+        "endMs": 30000,
+        "textEn": "And you're married now",
+        "textZhTw": "而且你現在結婚了"
+      },
+      {
+        "id": "cap_004",
+        "sortOrder": 4,
+        "startMs": 30000,
+        "endMs": 36000,
+        "textEn": "I heard that your dreams came true",
+        "textZhTw": "我聽說你的夢想成真了"
+      },
+      {
+        "id": "cap_005",
+        "sortOrder": 5,
+        "startMs": 36000,
+        "endMs": 39000,
+        "textEn": "Guess she gave you things",
+        "textZhTw": "想必她給了你一些東西"
+      },
+      {
+        "id": "cap_006",
+        "sortOrder": 6,
+        "startMs": 39000,
+        "endMs": 44000,
+        "textEn": "I didn't give to you",
+        "textZhTw": "是我沒有給過你的"
+      },
+      {
+        "id": "cap_007",
+        "sortOrder": 7,
+        "startMs": 44000,
+        "endMs": 50000,
+        "textEn": "Old friend, why are you so shy?",
+        "textZhTw": "老朋友，你為何如此靦腆？"
+      },
+      {
+        "id": "cap_008",
+        "sortOrder": 8,
+        "startMs": 50000,
+        "endMs": 54000,
+        "textEn": "Ain't like you to hold back",
+        "textZhTw": "畏縮退怯不像是你的風格"
+      },
+      {
+        "id": "cap_009",
+        "sortOrder": 9,
+        "startMs": 54000,
+        "endMs": 58000,
+        "textEn": "Or hide from the light",
+        "textZhTw": "也不像你會躲避光芒"
+      },
+      {
+        "id": "cap_010",
+        "sortOrder": 10,
+        "startMs": 58000,
+        "endMs": 62000,
+        "textEn": "I hate to turn up out of the blue uninvited",
+        "textZhTw": "我不想這樣突然冒昧登門，不請自來"
+      },
+      {
+        "id": "cap_011",
+        "sortOrder": 11,
+        "startMs": 62000,
+        "endMs": 64000,
+        "textEn": "But I couldn't stay away, I couldn't fight it",
+        "textZhTw": "但我就是無法遠離，我無法抵抗"
+      },
+      {
+        "id": "cap_012",
+        "sortOrder": 12,
+        "startMs": 64000,
+        "endMs": 65000,
+        "textEn": "I couldn't fight it",
+        "textZhTw": "我無法抵抗"
+      },
+      {
+        "id": "cap_013",
+        "sortOrder": 13,
+        "startMs": 65000,
+        "endMs": 67000,
+        "textEn": "I had hoped you'd see my face",
+        "textZhTw": "我曾希望你能看見我的臉"
+      },
+      {
+        "id": "cap_014",
+        "sortOrder": 14,
+        "startMs": 67000,
+        "endMs": 68000,
+        "textEn": "And that you'd be reminded",
+        "textZhTw": "然後你會想起"
+      },
+      {
+        "id": "cap_015",
+        "sortOrder": 15,
+        "startMs": 68000,
+        "endMs": 74000,
+        "textEn": "That for me it isn't over",
+        "textZhTw": "對我來說一切還沒結束"
+      },
+      {
+        "id": "cap_016",
+        "sortOrder": 16,
+        "startMs": 74000,
+        "endMs": 81000,
+        "textEn": "Never mind, I'll find someone like you",
+        "textZhTw": "沒關係，我會找到一個像你一樣的人"
+      },
+      {
+        "id": "cap_017",
+        "sortOrder": 17,
+        "startMs": 81000,
+        "endMs": 87000,
+        "textEn": "I wish nothing but the best for you, too",
+        "textZhTw": "我也只願你一切都好"
+      },
+      {
+        "id": "cap_018",
+        "sortOrder": 18,
+        "startMs": 87000,
+        "endMs": 91000,
+        "textEn": "Don't forget me, I beg",
+        "textZhTw": "請不要忘記我，我懇求你"
+      },
+      {
+        "id": "cap_019",
+        "sortOrder": 19,
+        "startMs": 91000,
+        "endMs": 94000,
+        "textEn": "I remember you said",
+        "textZhTw": "我記得你曾說過"
+      },
+      {
+        "id": "cap_020",
+        "sortOrder": 20,
+        "startMs": 94000,
+        "endMs": 97000,
+        "textEn": "Sometimes it lasts in love",
+        "textZhTw": "有時愛情可以長久"
+      },
+      {
+        "id": "cap_021",
+        "sortOrder": 21,
+        "startMs": 97000,
+        "endMs": 102000,
+        "textEn": "But sometimes it hurts instead",
+        "textZhTw": "但有時它卻帶來傷痛"
+      },
+      {
+        "id": "cap_022",
+        "sortOrder": 22,
+        "startMs": 102000,
+        "endMs": 104000,
+        "textEn": "Sometimes it lasts in love",
+        "textZhTw": "有時愛情可以長久"
+      },
+      {
+        "id": "cap_023",
+        "sortOrder": 23,
+        "startMs": 104000,
+        "endMs": 112000,
+        "textEn": "But sometimes it hurts instead",
+        "textZhTw": "但有時它卻帶來傷痛"
+      },
+      {
+        "id": "cap_024",
+        "sortOrder": 24,
+        "startMs": 112000,
+        "endMs": 118000,
+        "textEn": "You know how the time flies",
+        "textZhTw": "你知道時光是如何飛逝的"
+      }
+    ],
+    "vocabularyItems": [
+      {
+        "id": "voc_001",
+        "captionId": "cap_005",
+        "startMs": 25000,
+        "endMs": 31000,
+        "phrase": "coffee vocabulary",
+        "definitionEn": "words and phrases related to coffee",
+        "definitionZhTw": "與咖啡相關的單字和片語",
+        "noteZhTw": "vocabulary 是「單字、詞彙」的意思，可以用在各種主題，例如 coffee vocabulary、business vocabulary。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Today I want to teach you some coffee vocabulary.",
+            "zhTw": "今天我想教你一些咖啡相關的單字。"
+          }
+        ]
+      },
+      {
+        "id": "voc_002",
+        "captionId": "cap_006",
+        "startMs": 31000,
+        "endMs": 35000,
+        "phrase": "pretty difficult",
+        "definitionEn": "quite difficult or a little difficult",
+        "definitionZhTw": "相當困難、有點難",
+        "noteZhTw": "pretty 在口語裡常用來表示「滿、相當」，不是只有「漂亮」的意思。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Ordering coffee can be pretty difficult.",
+            "zhTw": "點咖啡可能會滿難的。"
+          }
+        ]
+      },
+      {
+        "id": "voc_003",
+        "captionId": "cap_008",
+        "startMs": 41000,
+        "endMs": 49000,
+        "phrase": "come along with me",
+        "definitionEn": "come with me",
+        "definitionZhTw": "跟我一起來",
+        "noteZhTw": "come along with me 是影片、旅遊、Vlog 裡很常見的自然說法。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Come along with me and let's learn some English.",
+            "zhTw": "跟我一起來，我們來學一些英文。"
+          }
+        ]
+      },
+      {
+        "id": "voc_004",
+        "captionId": "cap_009",
+        "startMs": 49000,
+        "endMs": 55000,
+        "phrase": "facts about Starbucks",
+        "definitionEn": "information or true details about something",
+        "definitionZhTw": "關於某件事的事實或資訊",
+        "noteZhTw": "facts about something 表示「關於某事的事實／小知識」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "I want to teach you some facts about Starbucks.",
+            "zhTw": "我想教你一些關於星巴克的小知識。"
+          }
+        ]
+      },
+      {
+        "id": "voc_005",
+        "captionId": "cap_011",
+        "startMs": 66000,
+        "endMs": 72000,
+        "phrase": "worldwide",
+        "definitionEn": "around the world",
+        "definitionZhTw": "全世界、全球",
+        "noteZhTw": "worldwide 可以當副詞或形容詞，表示「全球的／在全世界」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "There are Starbucks stores worldwide.",
+            "zhTw": "全球都有星巴克門市。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson": {
+      "id": "fairy_tale_001",
+      "type": "fairy_tale",
+      "title": "fairy_tale_001 title",
+      "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
+      "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
+      "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
+      "durationMs": 568000,
+      "level": "beginner",
+      "category": "daily-english",
+      "tags": [
+        "coffee",
+        "starbucks",
+        "daily-life",
+        "vocabulary"
+      ],
+      "isFree": true,
+      "viewCount": 0,
+      "createdAt": "2026-05-20T18:50:00+08:00",
+      "updatedAt": "2026-05-20T18:50:00+08:00"
+    },
+    "playback": {
+      "videoProvider": "youtube",
+      "youtubeVideoId": "jhEtBuuYNj4",
+      "videoUrl": "https://www.youtube.com/watch?v=jhEtBuuYNj4",
+      "hlsUrl": "",
+      "durationMs": 568000,
+      "startAtMs": 0,
+      "allowSeek": true,
+      "allowPlaybackSpeed": true
+    },
+    "captionsVersion": 1,
+    "captions": [
+      {
+        "id": "cap_001",
+        "sortOrder": 1,
+        "startMs": 0,
+        "endMs": 6000,
+        "textEn": "Hey guys! It's Ariannita la Gringa and welcome back to my YouTube channel. Can you guys guess",
+        "textZhTw": "嗨大家！我是 Ariannita la Gringa，歡迎回到我的 YouTube 頻道。你們猜得到嗎"
+      },
+      {
+        "id": "cap_002",
+        "sortOrder": 2,
+        "startMs": 6000,
+        "endMs": 12000,
+        "textEn": "where I'm at today? Today I'm at Starbucks and as you can see behind me you can see",
+        "textZhTw": "我今天在哪裡嗎？今天我在星巴克，而且你們可以看到我後面有"
+      },
+      {
+        "id": "cap_003",
+        "sortOrder": 3,
+        "startMs": 12000,
+        "endMs": 18000,
+        "textEn": "the beautiful Starbucks logo that they have. And this logo is famous worldwide. You all",
+        "textZhTw": "他們漂亮的星巴克標誌。這個標誌在全世界都很有名。你們大家"
+      },
+      {
+        "id": "cap_004",
+        "sortOrder": 4,
+        "startMs": 18000,
+        "endMs": 25000,
+        "textEn": "might be wondering... Ariannita why are you at Starbucks? Well today I'm at Starbucks because I",
+        "textZhTw": "可能會想說……Ariannita，妳為什麼在星巴克？其實今天我在星巴克是因為我"
+      },
+      {
+        "id": "cap_005",
+        "sortOrder": 5,
+        "startMs": 25000,
+        "endMs": 31000,
+        "textEn": "want to teach you guys some coffee vocabulary. And you guys might be wondering... Wait it's",
+        "textZhTw": "想教你們一些咖啡相關的單字。你們可能會想說……等等，這不是"
+      },
+      {
+        "id": "cap_006",
+        "sortOrder": 6,
+        "startMs": 31000,
+        "endMs": 35000,
+        "textEn": "really easy to order coffee... Actually, it can be pretty difficult especially at",
+        "textZhTw": "點咖啡很簡單嗎……其實，點咖啡可能滿難的，尤其是在"
+      },
+      {
+        "id": "cap_007",
+        "sortOrder": 7,
+        "startMs": 35000,
+        "endMs": 41000,
+        "textEn": "Starbucks because they have different sizes, different coffee, and different drinks all",
+        "textZhTw": "星巴克，因為他們有不同尺寸、不同咖啡，還有各種不同飲品"
+      },
+      {
+        "id": "cap_008",
+        "sortOrder": 8,
+        "startMs": 41000,
+        "endMs": 49000,
+        "textEn": "together. So come along with me and let's go learn some English vocab inside Starbucks.",
+        "textZhTw": "全部混在一起。所以跟我一起來吧，我們進星巴克學一些英文單字。"
+      },
+      {
+        "id": "cap_009",
+        "sortOrder": 9,
+        "startMs": 49000,
+        "endMs": 55000,
+        "textEn": "Before walking inside this Starbucks store I want to teach you guys some facts about Starbucks.",
+        "textZhTw": "在走進這間星巴克之前，我想先教你們一些關於星巴克的小知識。"
+      },
+      {
+        "id": "cap_010",
+        "sortOrder": 10,
+        "startMs": 55000,
+        "endMs": 66000,
+        "textEn": "The first original Starbucks opened in 1971 in Seattle, Washington. And there are over 33,833",
+        "textZhTw": "第一間星巴克在 1971 年於華盛頓州西雅圖開幕。而全球目前有超過 33,833"
+      },
+      {
+        "id": "cap_011",
+        "sortOrder": 11,
+        "startMs": 66000,
+        "endMs": 72000,
+        "textEn": "stores worldwide. 15,000 of those stores are located right in the United States of America.",
+        "textZhTw": "間門市。其中有 15,000 間門市就位在美國。"
+      }
+    ],
+    "vocabularyItems": [
+      {
+        "id": "voc_001",
+        "captionId": "cap_005",
+        "startMs": 25000,
+        "endMs": 31000,
+        "phrase": "coffee vocabulary",
+        "definitionEn": "words and phrases related to coffee",
+        "definitionZhTw": "與咖啡相關的單字和片語",
+        "noteZhTw": "vocabulary 是「單字、詞彙」的意思，可以用在各種主題，例如 coffee vocabulary、business vocabulary。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Today I want to teach you some coffee vocabulary.",
+            "zhTw": "今天我想教你一些咖啡相關的單字。"
+          }
+        ]
+      },
+      {
+        "id": "voc_002",
+        "captionId": "cap_006",
+        "startMs": 31000,
+        "endMs": 35000,
+        "phrase": "pretty difficult",
+        "definitionEn": "quite difficult or a little difficult",
+        "definitionZhTw": "相當困難、有點難",
+        "noteZhTw": "pretty 在口語裡常用來表示「滿、相當」，不是只有「漂亮」的意思。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Ordering coffee can be pretty difficult.",
+            "zhTw": "點咖啡可能會滿難的。"
+          }
+        ]
+      },
+      {
+        "id": "voc_003",
+        "captionId": "cap_008",
+        "startMs": 41000,
+        "endMs": 49000,
+        "phrase": "come along with me",
+        "definitionEn": "come with me",
+        "definitionZhTw": "跟我一起來",
+        "noteZhTw": "come along with me 是影片、旅遊、Vlog 裡很常見的自然說法。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Come along with me and let's learn some English.",
+            "zhTw": "跟我一起來，我們來學一些英文。"
+          }
+        ]
+      },
+      {
+        "id": "voc_004",
+        "captionId": "cap_009",
+        "startMs": 49000,
+        "endMs": 55000,
+        "phrase": "facts about Starbucks",
+        "definitionEn": "information or true details about something",
+        "definitionZhTw": "關於某件事的事實或資訊",
+        "noteZhTw": "facts about something 表示「關於某事的事實／小知識」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "I want to teach you some facts about Starbucks.",
+            "zhTw": "我想教你一些關於星巴克的小知識。"
+          }
+        ]
+      },
+      {
+        "id": "voc_005",
+        "captionId": "cap_011",
+        "startMs": 66000,
+        "endMs": 72000,
+        "phrase": "worldwide",
+        "definitionEn": "around the world",
+        "definitionZhTw": "全世界、全球",
+        "noteZhTw": "worldwide 可以當副詞或形容詞，表示「全球的／在全世界」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "There are Starbucks stores worldwide.",
+            "zhTw": "全球都有星巴克門市。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson": {
+      "id": "column_001",
+      "type": "column",
+      "title": "column_001 title",
+      "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
+      "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
+      "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
+      "durationMs": 568000,
+      "level": "beginner",
+      "category": "daily-english",
+      "tags": [
+        "coffee",
+        "starbucks",
+        "daily-life",
+        "vocabulary"
+      ],
+      "isFree": true,
+      "viewCount": 0,
+      "createdAt": "2026-05-20T18:50:00+08:00",
+      "updatedAt": "2026-05-20T18:50:00+08:00"
+    },
+    "playback": {
+      "videoProvider": "youtube",
+      "youtubeVideoId": "jhEtBuuYNj4",
+      "videoUrl": "https://www.youtube.com/watch?v=jhEtBuuYNj4",
+      "hlsUrl": "",
+      "durationMs": 568000,
+      "startAtMs": 0,
+      "allowSeek": true,
+      "allowPlaybackSpeed": true
+    },
+    "captionsVersion": 1,
+    "captions": [
+      {
+        "id": "cap_001",
+        "sortOrder": 1,
+        "startMs": 0,
+        "endMs": 6000,
+        "textEn": "Hey guys! It's Ariannita la Gringa and welcome back to my YouTube channel. Can you guys guess",
+        "textZhTw": "嗨大家！我是 Ariannita la Gringa，歡迎回到我的 YouTube 頻道。你們猜得到嗎"
+      },
+      {
+        "id": "cap_002",
+        "sortOrder": 2,
+        "startMs": 6000,
+        "endMs": 12000,
+        "textEn": "where I'm at today? Today I'm at Starbucks and as you can see behind me you can see",
+        "textZhTw": "我今天在哪裡嗎？今天我在星巴克，而且你們可以看到我後面有"
+      },
+      {
+        "id": "cap_003",
+        "sortOrder": 3,
+        "startMs": 12000,
+        "endMs": 18000,
+        "textEn": "the beautiful Starbucks logo that they have. And this logo is famous worldwide. You all",
+        "textZhTw": "他們漂亮的星巴克標誌。這個標誌在全世界都很有名。你們大家"
+      },
+      {
+        "id": "cap_004",
+        "sortOrder": 4,
+        "startMs": 18000,
+        "endMs": 25000,
+        "textEn": "might be wondering... Ariannita why are you at Starbucks? Well today I'm at Starbucks because I",
+        "textZhTw": "可能會想說……Ariannita，妳為什麼在星巴克？其實今天我在星巴克是因為我"
+      },
+      {
+        "id": "cap_005",
+        "sortOrder": 5,
+        "startMs": 25000,
+        "endMs": 31000,
+        "textEn": "want to teach you guys some coffee vocabulary. And you guys might be wondering... Wait it's",
+        "textZhTw": "想教你們一些咖啡相關的單字。你們可能會想說……等等，這不是"
+      },
+      {
+        "id": "cap_006",
+        "sortOrder": 6,
+        "startMs": 31000,
+        "endMs": 35000,
+        "textEn": "really easy to order coffee... Actually, it can be pretty difficult especially at",
+        "textZhTw": "點咖啡很簡單嗎……其實，點咖啡可能滿難的，尤其是在"
+      },
+      {
+        "id": "cap_007",
+        "sortOrder": 7,
+        "startMs": 35000,
+        "endMs": 41000,
+        "textEn": "Starbucks because they have different sizes, different coffee, and different drinks all",
+        "textZhTw": "星巴克，因為他們有不同尺寸、不同咖啡，還有各種不同飲品"
+      },
+      {
+        "id": "cap_008",
+        "sortOrder": 8,
+        "startMs": 41000,
+        "endMs": 49000,
+        "textEn": "together. So come along with me and let's go learn some English vocab inside Starbucks.",
+        "textZhTw": "全部混在一起。所以跟我一起來吧，我們進星巴克學一些英文單字。"
+      },
+      {
+        "id": "cap_009",
+        "sortOrder": 9,
+        "startMs": 49000,
+        "endMs": 55000,
+        "textEn": "Before walking inside this Starbucks store I want to teach you guys some facts about Starbucks.",
+        "textZhTw": "在走進這間星巴克之前，我想先教你們一些關於星巴克的小知識。"
+      },
+      {
+        "id": "cap_010",
+        "sortOrder": 10,
+        "startMs": 55000,
+        "endMs": 66000,
+        "textEn": "The first original Starbucks opened in 1971 in Seattle, Washington. And there are over 33,833",
+        "textZhTw": "第一間星巴克在 1971 年於華盛頓州西雅圖開幕。而全球目前有超過 33,833"
+      },
+      {
+        "id": "cap_011",
+        "sortOrder": 11,
+        "startMs": 66000,
+        "endMs": 72000,
+        "textEn": "stores worldwide. 15,000 of those stores are located right in the United States of America.",
+        "textZhTw": "間門市。其中有 15,000 間門市就位在美國。"
+      }
+    ],
+    "vocabularyItems": [
+      {
+        "id": "voc_001",
+        "captionId": "cap_005",
+        "startMs": 25000,
+        "endMs": 31000,
+        "phrase": "coffee vocabulary",
+        "definitionEn": "words and phrases related to coffee",
+        "definitionZhTw": "與咖啡相關的單字和片語",
+        "noteZhTw": "vocabulary 是「單字、詞彙」的意思，可以用在各種主題，例如 coffee vocabulary、business vocabulary。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Today I want to teach you some coffee vocabulary.",
+            "zhTw": "今天我想教你一些咖啡相關的單字。"
+          }
+        ]
+      },
+      {
+        "id": "voc_002",
+        "captionId": "cap_006",
+        "startMs": 31000,
+        "endMs": 35000,
+        "phrase": "pretty difficult",
+        "definitionEn": "quite difficult or a little difficult",
+        "definitionZhTw": "相當困難、有點難",
+        "noteZhTw": "pretty 在口語裡常用來表示「滿、相當」，不是只有「漂亮」的意思。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Ordering coffee can be pretty difficult.",
+            "zhTw": "點咖啡可能會滿難的。"
+          }
+        ]
+      },
+      {
+        "id": "voc_003",
+        "captionId": "cap_008",
+        "startMs": 41000,
+        "endMs": 49000,
+        "phrase": "come along with me",
+        "definitionEn": "come with me",
+        "definitionZhTw": "跟我一起來",
+        "noteZhTw": "come along with me 是影片、旅遊、Vlog 裡很常見的自然說法。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Come along with me and let's learn some English.",
+            "zhTw": "跟我一起來，我們來學一些英文。"
+          }
+        ]
+      },
+      {
+        "id": "voc_004",
+        "captionId": "cap_009",
+        "startMs": 49000,
+        "endMs": 55000,
+        "phrase": "facts about Starbucks",
+        "definitionEn": "information or true details about something",
+        "definitionZhTw": "關於某件事的事實或資訊",
+        "noteZhTw": "facts about something 表示「關於某事的事實／小知識」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "I want to teach you some facts about Starbucks.",
+            "zhTw": "我想教你一些關於星巴克的小知識。"
+          }
+        ]
+      },
+      {
+        "id": "voc_005",
+        "captionId": "cap_011",
+        "startMs": 66000,
+        "endMs": 72000,
+        "phrase": "worldwide",
+        "definitionEn": "around the world",
+        "definitionZhTw": "全世界、全球",
+        "noteZhTw": "worldwide 可以當副詞或形容詞，表示「全球的／在全世界」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "There are Starbucks stores worldwide.",
+            "zhTw": "全球都有星巴克門市。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson": {
+      "id": "supplement_001",
+      "type": "supplement",
+      "title": "supplement_001 title",
+      "subtitle": "Ariannita la Gringa - Starbucks Coffee Vocabulary",
+      "description": "日本觀光指南】來了日本一定要去一次的景點、看一次的風景、吃一次",
+      "coverUrl": "https://static.gltjp.com/glt/data/article/21000/20522/20231127_155101_412e7290_w1920.webp",
+      "durationMs": 568000,
+      "level": "beginner",
+      "category": "daily-english",
+      "tags": [
+        "coffee",
+        "starbucks",
+        "daily-life",
+        "vocabulary"
+      ],
+      "isFree": true,
+      "viewCount": 0,
+      "createdAt": "2026-05-20T18:50:00+08:00",
+      "updatedAt": "2026-05-20T18:50:00+08:00"
+    },
+    "playback": {
+      "videoProvider": "youtube",
+      "youtubeVideoId": "jhEtBuuYNj4",
+      "videoUrl": "https://www.youtube.com/watch?v=jhEtBuuYNj4",
+      "hlsUrl": "",
+      "durationMs": 568000,
+      "startAtMs": 0,
+      "allowSeek": true,
+      "allowPlaybackSpeed": true
+    },
+    "captionsVersion": 1,
+    "captions": [
+      {
+        "id": "cap_001",
+        "sortOrder": 1,
+        "startMs": 0,
+        "endMs": 6000,
+        "textEn": "Hey guys! It's Ariannita la Gringa and welcome back to my YouTube channel. Can you guys guess",
+        "textZhTw": "嗨大家！我是 Ariannita la Gringa，歡迎回到我的 YouTube 頻道。你們猜得到嗎"
+      },
+      {
+        "id": "cap_002",
+        "sortOrder": 2,
+        "startMs": 6000,
+        "endMs": 12000,
+        "textEn": "where I'm at today? Today I'm at Starbucks and as you can see behind me you can see",
+        "textZhTw": "我今天在哪裡嗎？今天我在星巴克，而且你們可以看到我後面有"
+      },
+      {
+        "id": "cap_003",
+        "sortOrder": 3,
+        "startMs": 12000,
+        "endMs": 18000,
+        "textEn": "the beautiful Starbucks logo that they have. And this logo is famous worldwide. You all",
+        "textZhTw": "他們漂亮的星巴克標誌。這個標誌在全世界都很有名。你們大家"
+      },
+      {
+        "id": "cap_004",
+        "sortOrder": 4,
+        "startMs": 18000,
+        "endMs": 25000,
+        "textEn": "might be wondering... Ariannita why are you at Starbucks? Well today I'm at Starbucks because I",
+        "textZhTw": "可能會想說……Ariannita，妳為什麼在星巴克？其實今天我在星巴克是因為我"
+      },
+      {
+        "id": "cap_005",
+        "sortOrder": 5,
+        "startMs": 25000,
+        "endMs": 31000,
+        "textEn": "want to teach you guys some coffee vocabulary. And you guys might be wondering... Wait it's",
+        "textZhTw": "想教你們一些咖啡相關的單字。你們可能會想說……等等，這不是"
+      },
+      {
+        "id": "cap_006",
+        "sortOrder": 6,
+        "startMs": 31000,
+        "endMs": 35000,
+        "textEn": "really easy to order coffee... Actually, it can be pretty difficult especially at",
+        "textZhTw": "點咖啡很簡單嗎……其實，點咖啡可能滿難的，尤其是在"
+      },
+      {
+        "id": "cap_007",
+        "sortOrder": 7,
+        "startMs": 35000,
+        "endMs": 41000,
+        "textEn": "Starbucks because they have different sizes, different coffee, and different drinks all",
+        "textZhTw": "星巴克，因為他們有不同尺寸、不同咖啡，還有各種不同飲品"
+      },
+      {
+        "id": "cap_008",
+        "sortOrder": 8,
+        "startMs": 41000,
+        "endMs": 49000,
+        "textEn": "together. So come along with me and let's go learn some English vocab inside Starbucks.",
+        "textZhTw": "全部混在一起。所以跟我一起來吧，我們進星巴克學一些英文單字。"
+      },
+      {
+        "id": "cap_009",
+        "sortOrder": 9,
+        "startMs": 49000,
+        "endMs": 55000,
+        "textEn": "Before walking inside this Starbucks store I want to teach you guys some facts about Starbucks.",
+        "textZhTw": "在走進這間星巴克之前，我想先教你們一些關於星巴克的小知識。"
+      },
+      {
+        "id": "cap_010",
+        "sortOrder": 10,
+        "startMs": 55000,
+        "endMs": 66000,
+        "textEn": "The first original Starbucks opened in 1971 in Seattle, Washington. And there are over 33,833",
+        "textZhTw": "第一間星巴克在 1971 年於華盛頓州西雅圖開幕。而全球目前有超過 33,833"
+      },
+      {
+        "id": "cap_011",
+        "sortOrder": 11,
+        "startMs": 66000,
+        "endMs": 72000,
+        "textEn": "stores worldwide. 15,000 of those stores are located right in the United States of America.",
+        "textZhTw": "間門市。其中有 15,000 間門市就位在美國。"
+      }
+    ],
+    "vocabularyItems": [
+      {
+        "id": "voc_001",
+        "captionId": "cap_005",
+        "startMs": 25000,
+        "endMs": 31000,
+        "phrase": "coffee vocabulary",
+        "definitionEn": "words and phrases related to coffee",
+        "definitionZhTw": "與咖啡相關的單字和片語",
+        "noteZhTw": "vocabulary 是「單字、詞彙」的意思，可以用在各種主題，例如 coffee vocabulary、business vocabulary。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Today I want to teach you some coffee vocabulary.",
+            "zhTw": "今天我想教你一些咖啡相關的單字。"
+          }
+        ]
+      },
+      {
+        "id": "voc_002",
+        "captionId": "cap_006",
+        "startMs": 31000,
+        "endMs": 35000,
+        "phrase": "pretty difficult",
+        "definitionEn": "quite difficult or a little difficult",
+        "definitionZhTw": "相當困難、有點難",
+        "noteZhTw": "pretty 在口語裡常用來表示「滿、相當」，不是只有「漂亮」的意思。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Ordering coffee can be pretty difficult.",
+            "zhTw": "點咖啡可能會滿難的。"
+          }
+        ]
+      },
+      {
+        "id": "voc_003",
+        "captionId": "cap_008",
+        "startMs": 41000,
+        "endMs": 49000,
+        "phrase": "come along with me",
+        "definitionEn": "come with me",
+        "definitionZhTw": "跟我一起來",
+        "noteZhTw": "come along with me 是影片、旅遊、Vlog 裡很常見的自然說法。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "Come along with me and let's learn some English.",
+            "zhTw": "跟我一起來，我們來學一些英文。"
+          }
+        ]
+      },
+      {
+        "id": "voc_004",
+        "captionId": "cap_009",
+        "startMs": 49000,
+        "endMs": 55000,
+        "phrase": "facts about Starbucks",
+        "definitionEn": "information or true details about something",
+        "definitionZhTw": "關於某件事的事實或資訊",
+        "noteZhTw": "facts about something 表示「關於某事的事實／小知識」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "I want to teach you some facts about Starbucks.",
+            "zhTw": "我想教你一些關於星巴克的小知識。"
+          }
+        ]
+      },
+      {
+        "id": "voc_005",
+        "captionId": "cap_011",
+        "startMs": 66000,
+        "endMs": 72000,
+        "phrase": "worldwide",
+        "definitionEn": "around the world",
+        "definitionZhTw": "全世界、全球",
+        "noteZhTw": "worldwide 可以當副詞或形容詞，表示「全球的／在全世界」。",
+        "level": "A2",
+        "examples": [
+          {
+            "en": "There are Starbucks stores worldwide.",
+            "zhTw": "全球都有星巴克門市。"
+          }
+        ]
+      }
+    ]
   }
 ]
