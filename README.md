@@ -1,4 +1,4 @@
-# rest-boilerplate-refined-go
+# luma-lang-go
 
 ![CI](https://github.com/tenSunFree/rest-boilerplate-refined-go/actions/workflows/ci.yml/badge.svg)
 
@@ -21,7 +21,7 @@ It can also be paired with my Kotlin Multiplatform app project to demonstrate a 
 
 This backend can be used together with my Kotlin Multiplatform app project:
 
-- [starter-template-refined-kmp](https://github.com/tenSunFree/KmpStarterTemplateRefined)
+- [luma-lang-kmp](https://github.com/tenSunFree/luma-lang-kmp)
 
 The app project provides a cross-platform client foundation built with Kotlin Multiplatform, Compose Multiplatform, Clean Architecture, MVI ViewModel, Navigation3, and Koin.
 
