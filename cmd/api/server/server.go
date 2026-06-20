@@ -15,12 +15,14 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/snykk/go-rest-boilerplate/internal/business/usecases/auth"
 	contentsuc "github.com/snykk/go-rest-boilerplate/internal/business/usecases/contents"
+	livesuc "github.com/snykk/go-rest-boilerplate/internal/business/usecases/lives"
 	"github.com/snykk/go-rest-boilerplate/internal/business/usecases/users"
 	"github.com/snykk/go-rest-boilerplate/internal/config"
 	"github.com/snykk/go-rest-boilerplate/internal/constants"
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/caches"
 	"github.com/snykk/go-rest-boilerplate/internal/datasources/drivers"
 	contentspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/contents"
+	livespostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/lives"
 	userspostgres "github.com/snykk/go-rest-boilerplate/internal/datasources/repositories/postgres/users"
 	V1Handler "github.com/snykk/go-rest-boilerplate/internal/http/handlers/v1"
 	"github.com/snykk/go-rest-boilerplate/internal/http/middlewares"
@@ -136,6 +138,15 @@ func NewApp() (*App, error) {
 	contentRepo := contentspostgres.NewContentRepository(conn)
 	contentsUC := contentsuc.NewUsecase(contentRepo)
 	routes.NewContentsRoute(api, contentsUC).Routes()
+
+	liveRepo := livespostgres.NewPostgreLiveRepository(conn)
+	agoraTokenSvc := livesuc.NewAgoraTokenService(
+		config.AppConfig.AgoraAppID,
+		config.AppConfig.AgoraAppCertificate,
+		config.AppConfig.AgoraRTCTokenTTLSeconds,
+	)
+	livesUC := livesuc.NewUsecase(liveRepo, agoraTokenSvc, config.AppConfig.AgoraAppID, config.AppConfig.WsBaseURL)
+	routes.NewLivesRoute(api, livesUC, authMiddleware).Routes()
 
 	// setup http server
 	server := &http.Server{

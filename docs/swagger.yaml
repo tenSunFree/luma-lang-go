@@ -1,6 +1,6 @@
 basePath: /api/v1
 definitions:
-  requests.ChangePasswordRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest:
     properties:
       current_password:
         maxLength: 72
@@ -14,7 +14,7 @@ definitions:
     - current_password
     - new_password
     type: object
-  requests.ForgotPasswordRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest:
     properties:
       email:
         maxLength: 50
@@ -22,7 +22,21 @@ definitions:
     required:
     - email
     type: object
-  requests.LoginRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.JoinLiveRequest:
+    properties:
+      clientType:
+        example: android
+        type: string
+    type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LeaveLiveRequest:
+    properties:
+      uid:
+        example: 10042
+        type: integer
+    required:
+    - uid
+    type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest:
     properties:
       email:
         maxLength: 50
@@ -35,14 +49,14 @@ definitions:
     - email
     - password
     type: object
-  requests.RefreshRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest:
     properties:
       refresh_token:
         type: string
     required:
     - refresh_token
     type: object
-  requests.RegisterRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest:
     properties:
       email:
         maxLength: 50
@@ -75,7 +89,15 @@ definitions:
     - password
     - username
     type: object
-  requests.ResetPasswordRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RenewTokenRequest:
+    properties:
+      uid:
+        example: 10042
+        type: integer
+    required:
+    - uid
+    type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest:
     properties:
       new_password:
         maxLength: 72
@@ -87,7 +109,7 @@ definitions:
     - new_password
     - token
     type: object
-  requests.SendOTPRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest:
     properties:
       email:
         maxLength: 50
@@ -95,7 +117,7 @@ definitions:
     required:
     - email
     type: object
-  requests.VerifyOTPRequest:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest:
     properties:
       code:
         type: string
@@ -106,7 +128,68 @@ definitions:
     - code
     - email
     type: object
-  responses.UserResponse:
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LiveCourseResponse:
+    properties:
+      canJoin:
+        example: false
+        type: boolean
+      category:
+        example: 語言學習
+        type: string
+      courseId:
+        example: course_ielts_001
+        type: string
+      courseType:
+        example: required
+        type: string
+      endedAt:
+        type: string
+      isReminderEnabled:
+        example: false
+        type: boolean
+      level:
+        example: A2
+        type: string
+      liveId:
+        example: live_20260618_1900_001
+        type: string
+      scheduledStartAt:
+        example: "2026-06-18T19:00:00+08:00"
+        type: string
+      startedAt:
+        example: "2026-06-18T19:02:00+08:00"
+        type: string
+      status:
+        example: scheduled
+        type: string
+      teacher:
+        $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.TeacherResponse'
+      textbookUrl:
+        example: https://cdn.example.com/textbooks/ielts_001.pdf
+        type: string
+      thumbnailUrl:
+        example: https://cdn.example.com/courses/ielts_001.jpg
+        type: string
+      title:
+        example: 雅思閱讀[一般訓練組] - 段落標題-複習篇
+        type: string
+      viewerCount:
+        example: 42
+        type: integer
+    type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.TeacherResponse:
+    properties:
+      avatarUrl:
+        example: https://cdn.example.com/teachers/ben.jpg
+        type: string
+      name:
+        example: Ben
+        type: string
+      teacherId:
+        example: teacher_ben
+        type: string
+    type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse:
     properties:
       created_at:
         type: string
@@ -131,7 +214,7 @@ definitions:
       username:
         type: string
     type: object
-  v1.BaseResponse:
+  github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse:
     properties:
       data: {}
       message:
@@ -167,7 +250,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.LoginRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest'
       produces:
       - application/json
       responses:
@@ -175,27 +258,27 @@ paths:
           description: Tokens issued
           schema:
             allOf:
-            - $ref: '#/definitions/v1.BaseResponse'
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/responses.UserResponse'
+                  $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse'
               type: object
         "400":
           description: Malformed JSON body
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "401":
           description: Invalid email or password
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "403":
           description: Account not yet activated
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Authenticate and issue a token pair
       tags:
       - auth
@@ -212,22 +295,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.RefreshRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Logged out
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "401":
           description: Refresh token invalid
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Revoke the refresh token
       tags:
       - auth
@@ -243,26 +326,26 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.ChangePasswordRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Password changed
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: Malformed JSON body
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "401":
           description: Current password incorrect
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       security:
       - BearerAuth: []
       summary: Change the authenticated user's password
@@ -280,7 +363,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.ForgotPasswordRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest'
       produces:
       - application/json
       responses:
@@ -288,15 +371,15 @@ paths:
           description: Reset email queued (or email not registered — same response
             either way)
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: Malformed JSON body
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Issue a password-reset token
       tags:
       - auth
@@ -312,26 +395,26 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.ResetPasswordRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Password reset
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: Malformed JSON body
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "401":
           description: Reset token invalid or expired
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Consume a reset token and set a new password
       tags:
       - auth
@@ -348,7 +431,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.RefreshRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest'
       produces:
       - application/json
       responses:
@@ -356,23 +439,23 @@ paths:
           description: New token pair
           schema:
             allOf:
-            - $ref: '#/definitions/v1.BaseResponse'
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/responses.UserResponse'
+                  $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse'
               type: object
         "401":
           description: Refresh token invalid, expired, or already revoked
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "403":
           description: Account no longer active
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Rotate the refresh token, return a new pair
       tags:
       - auth
@@ -389,7 +472,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.RegisterRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest'
       produces:
       - application/json
       responses:
@@ -397,27 +480,27 @@ paths:
           description: User created
           schema:
             allOf:
-            - $ref: '#/definitions/v1.BaseResponse'
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/responses.UserResponse'
+                  $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse'
               type: object
         "400":
           description: Malformed JSON body
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "409":
           description: Email or username already in use
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error (per-field detail in data.errors)
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "500":
           description: Internal error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Register a new user
       tags:
       - auth
@@ -434,30 +517,30 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.SendOTPRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OTP enqueued
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: Account already activated
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "404":
           description: Email not registered
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "500":
           description: Failed to enqueue mail
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Send an OTP code to the user's email
       tags:
       - auth
@@ -475,46 +558,47 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/requests.VerifyOTPRequest'
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest'
       produces:
       - application/json
       responses:
         "200":
           description: Account activated
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: Invalid OTP code
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "403":
           description: Locked out — too many invalid attempts
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "404":
           description: Email not registered
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       summary: Verify an OTP code and activate the account
       tags:
       - auth
   /contents:
     get:
-      description: 以 type 區分內容類型，支援分頁。type 為空時回傳所有類型。
+      description: Distinguishes content types by type, supports pagination. Returns
+        all types if type is empty.
       parameters:
       - description: video | music | fairy_tale | column | supplement
         in: query
         name: type
         type: string
-      - description: '頁碼 (default: 1)'
+      - description: 'Page number (default: 1)'
         in: query
         name: page
         type: integer
-      - description: '每頁筆數 (default: 20, max: 100)'
+      - description: 'Number of items per page (default: 20, max: 100)'
         in: query
         name: limit
         type: integer
@@ -524,13 +608,14 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
-      summary: 內容列表 / Get content list
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      summary: Content list / Get content list
       tags:
       - contents
   /contents/{contentId}:
     get:
-      description: 回傳完整內容資料：基本資訊、播放設定、字幕、單字。
+      description: 'Returns complete content information: basic information, playback
+        settings, subtitles, and single words.'
       parameters:
       - description: Content ID (e.g. video_starbucks_001)
         in: path
@@ -543,32 +628,33 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
-      summary: 內容詳情 / Get content detail
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      summary: Content details / Get content detail
       tags:
       - contents
   /contents/search:
     get:
-      description: 跨 title/subtitle/description/category 的關鍵字搜尋，可選擇限縮 type。
+      description: Keyword search across title/subtitle/description/category, with
+        optional narrowing type.
       parameters:
-      - description: 搜尋關鍵字
+      - description: Search keywords
         in: query
         name: q
         required: true
         type: string
-      - description: 限縮類型（選填）
+      - description: Narrowing type (optional)
         in: query
         name: type
         type: string
-      - description: '頁碼 (default: 1)'
+      - description: 'Page number (default: 1)'
         in: query
         name: page
         type: integer
-      - description: '每頁筆數 (default: 20, max: 100)'
+      - description: 'Number of items per page (default: 20, max: 100)'
         in: query
         name: limit
         type: integer
@@ -578,14 +664,427 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "400":
           description: q is required
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
-      summary: 搜尋內容 / Search contents
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      summary: Search contents
       tags:
       - contents
+  /live-courses:
+    get:
+      description: Returns scheduled and/or live courses. Pass status as comma-separated
+        values, e.g. status=scheduled,live. Reminder flag reflects the current user's
+        reminder state.
+      parameters:
+      - description: 'scheduled | live | ended | cancelled  (comma-separated, default:
+          scheduled,live)'
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    data:
+                      items:
+                        $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LiveCourseResponse'
+                      type: array
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: List live courses
+      tags:
+      - lives
+  /lives/{liveId}/join:
+    post:
+      consumes:
+      - application/json
+      description: Allocates a student Agora UID (10000+), generates an RTC token,
+        records the participant, and returns the full join config including teacher
+        stream UIDs and WebSocket chat URL.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      - description: Optional client metadata
+        in: body
+        name: request
+        schema:
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.JoinLiveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    agora:
+                      type: object
+                    chat:
+                      type: object
+                    courseId:
+                      type: string
+                    features:
+                      type: object
+                    liveId:
+                      type: string
+                    streamLayout:
+                      type: object
+                    teacher:
+                      type: object
+                  type: object
+              type: object
+        "400":
+          description: Malformed JSON
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "403":
+          description: Live not started yet
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Student joins a live
+      tags:
+      - lives
+  /lives/{liveId}/leave:
+    post:
+      consumes:
+      - application/json
+      description: Marks the participant as left and records watch duration.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      - description: UID is required
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LeaveLiveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    liveId:
+                      type: string
+                  type: object
+              type: object
+        "400":
+          description: Missing uid
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Student leaves a live
+      tags:
+      - lives
+  /lives/{liveId}/participants:
+    get:
+      description: Returns all online participants (left_at IS NULL). Teacher camera
+        and screen streams are merged into a single participant entry. Teacher stream
+        UIDs are returned separately in teacherStreams.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    participants:
+                      type: array
+                    teacherStreams:
+                      type: object
+                    totalCount:
+                      type: integer
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Get participants list
+      tags:
+      - lives
+  /lives/{liveId}/reminder:
+    delete:
+      description: Removes the reminder for the current user.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    isReminderEnabled:
+                      type: boolean
+                    liveId:
+                      type: string
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Disable reminder for a live
+      tags:
+      - lives
+    post:
+      description: Creates or updates a reminder set to 10 minutes before scheduledStartAt.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    isReminderEnabled:
+                      type: boolean
+                    liveId:
+                      type: string
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Enable reminder for a live
+      tags:
+      - lives
+  /lives/{liveId}/renew-token:
+    post:
+      consumes:
+      - application/json
+      description: Called when the Agora SDK fires token-privilege-will-expire. Pass
+        the same uid that was returned by /join.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      - description: UID to renew
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RenewTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    rtcToken:
+                      type: string
+                    tokenExpireAt:
+                      type: string
+                    uid:
+                      type: integer
+                  type: object
+              type: object
+        "400":
+          description: Missing uid
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Renew an Agora RTC token (student)
+      tags:
+      - lives
+  /teacher/lives/{liveId}/end:
+    post:
+      description: Changes live status to 'ended' and stamps ended_at. Teacher must
+        own the live.
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    liveId:
+                      type: string
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "403":
+          description: Teacher does not own this live
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Teacher ends a live session
+      tags:
+      - lives-teacher
+  /teacher/lives/{liveId}/start:
+    post:
+      description: Changes live status to 'live', generates two RTC tokens (camera
+        uid=1000, screen uid=2000) for the teacher. Teacher must own the live (teacherId
+        must match).
+      parameters:
+      - description: Live ID
+        in: path
+        name: liveId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+            - properties:
+                data:
+                  properties:
+                    agora:
+                      type: object
+                    courseId:
+                      type: string
+                    liveId:
+                      type: string
+                    streams:
+                      type: object
+                  type: object
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "403":
+          description: Teacher does not own this live
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+        "404":
+          description: Live not found
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
+      security:
+      - BearerAuth: []
+      summary: Teacher starts a live session
+      tags:
+      - lives-teacher
   /users/me:
     get:
       description: Reads the authenticated user from the JWT in the Authorization
@@ -598,19 +1097,19 @@ paths:
           description: User profile
           schema:
             allOf:
-            - $ref: '#/definitions/v1.BaseResponse'
+            - $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/responses.UserResponse'
+                  $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse'
               type: object
         "401":
           description: Missing or invalid token
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "404":
           description: User no longer exists
           schema:
-            $ref: '#/definitions/v1.BaseResponse'
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       security:
       - BearerAuth: []
       summary: Return the current user's profile

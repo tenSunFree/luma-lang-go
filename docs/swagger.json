@@ -41,7 +41,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.LoginRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest"
                         }
                     }
                 ],
@@ -51,13 +51,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/v1.BaseResponse"
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/responses.UserResponse"
+                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
                                         }
                                     }
                                 }
@@ -67,25 +67,25 @@
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Invalid email or password",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account not yet activated",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -111,7 +111,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.RefreshRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
                         }
                     }
                 ],
@@ -119,19 +119,19 @@
                     "200": {
                         "description": "Logged out",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Refresh token invalid",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -162,7 +162,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.ChangePasswordRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest"
                         }
                     }
                 ],
@@ -170,25 +170,25 @@
                     "200": {
                         "description": "Password changed",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Current password incorrect",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -214,7 +214,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.ForgotPasswordRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest"
                         }
                     }
                 ],
@@ -222,19 +222,19 @@
                     "200": {
                         "description": "Reset email queued (or email not registered — same response either way)",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -260,7 +260,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.ResetPasswordRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest"
                         }
                     }
                 ],
@@ -268,25 +268,25 @@
                     "200": {
                         "description": "Password reset",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "401": {
                         "description": "Reset token invalid or expired",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -312,7 +312,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.RefreshRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest"
                         }
                     }
                 ],
@@ -322,13 +322,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/v1.BaseResponse"
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/responses.UserResponse"
+                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
                                         }
                                     }
                                 }
@@ -338,19 +338,19 @@
                     "401": {
                         "description": "Refresh token invalid, expired, or already revoked",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Account no longer active",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -376,7 +376,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.RegisterRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest"
                         }
                     }
                 ],
@@ -386,13 +386,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/v1.BaseResponse"
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/responses.UserResponse"
+                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
                                         }
                                     }
                                 }
@@ -402,25 +402,25 @@
                     "400": {
                         "description": "Malformed JSON body",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "409": {
                         "description": "Email or username already in use",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error (per-field detail in data.errors)",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Internal error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -446,7 +446,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.SendOTPRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest"
                         }
                     }
                 ],
@@ -454,31 +454,31 @@
                     "200": {
                         "description": "OTP enqueued",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Account already activated",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "500": {
                         "description": "Failed to enqueue mail",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -504,7 +504,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.VerifyOTPRequest"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest"
                         }
                     }
                 ],
@@ -512,31 +512,31 @@
                     "200": {
                         "description": "Account activated",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "Invalid OTP code",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "403": {
                         "description": "Locked out — too many invalid attempts",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Email not registered",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "422": {
                         "description": "Validation error",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -544,14 +544,14 @@
         },
         "/contents": {
             "get": {
-                "description": "以 type 區分內容類型，支援分頁。type 為空時回傳所有類型。",
+                "description": "Distinguishes content types by type, supports pagination. Returns all types if type is empty.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "contents"
                 ],
-                "summary": "內容列表 / Get content list",
+                "summary": "Content list / Get content list",
                 "parameters": [
                     {
                         "type": "string",
@@ -561,13 +561,13 @@
                     },
                     {
                         "type": "integer",
-                        "description": "頁碼 (default: 1)",
+                        "description": "Page number (default: 1)",
                         "name": "page",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "每頁筆數 (default: 20, max: 100)",
+                        "description": "Number of items per page (default: 20, max: 100)",
                         "name": "limit",
                         "in": "query"
                     }
@@ -576,7 +576,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -584,37 +584,37 @@
         },
         "/contents/search": {
             "get": {
-                "description": "跨 title/subtitle/description/category 的關鍵字搜尋，可選擇限縮 type。",
+                "description": "Keyword search across title/subtitle/description/category, with optional narrowing type.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "contents"
                 ],
-                "summary": "搜尋內容 / Search contents",
+                "summary": "Search contents",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "搜尋關鍵字",
+                        "description": "Search keywords",
                         "name": "q",
                         "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "限縮類型（選填）",
+                        "description": "Narrowing type (optional)",
                         "name": "type",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "頁碼 (default: 1)",
+                        "description": "Page number (default: 1)",
                         "name": "page",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "每頁筆數 (default: 20, max: 100)",
+                        "description": "Number of items per page (default: 20, max: 100)",
                         "name": "limit",
                         "in": "query"
                     }
@@ -623,13 +623,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "400": {
                         "description": "q is required",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -637,14 +637,14 @@
         },
         "/contents/{contentId}": {
             "get": {
-                "description": "回傳完整內容資料：基本資訊、播放設定、字幕、單字。",
+                "description": "Returns complete content information: basic information, playback settings, subtitles, and single words.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "contents"
                 ],
-                "summary": "內容詳情 / Get content detail",
+                "summary": "Content details / Get content detail",
                 "parameters": [
                     {
                         "type": "string",
@@ -658,13 +658,684 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/live-courses": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns scheduled and/or live courses. Pass status as comma-separated values, e.g. status=scheduled,live. Reminder flag reflects the current user's reminder state.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "List live courses",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "scheduled | live | ended | cancelled  (comma-separated, default: scheduled,live)",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LiveCourseResponse"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/lives/{liveId}/join": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Allocates a student Agora UID (10000+), generates an RTC token, records the participant, and returns the full join config including teacher stream UIDs and WebSocket chat URL.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Student joins a live",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Optional client metadata",
+                        "name": "request",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.JoinLiveRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "agora": {
+                                                    "type": "object"
+                                                },
+                                                "chat": {
+                                                    "type": "object"
+                                                },
+                                                "courseId": {
+                                                    "type": "string"
+                                                },
+                                                "features": {
+                                                    "type": "object"
+                                                },
+                                                "liveId": {
+                                                    "type": "string"
+                                                },
+                                                "streamLayout": {
+                                                    "type": "object"
+                                                },
+                                                "teacher": {
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Malformed JSON",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Live not started yet",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/lives/{liveId}/leave": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Marks the participant as left and records watch duration.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Student leaves a live",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "UID is required",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LeaveLiveRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "liveId": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Missing uid",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/lives/{liveId}/participants": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns all online participants (left_at IS NULL). Teacher camera and screen streams are merged into a single participant entry. Teacher stream UIDs are returned separately in teacherStreams.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Get participants list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "participants": {
+                                                    "type": "array"
+                                                },
+                                                "teacherStreams": {
+                                                    "type": "object"
+                                                },
+                                                "totalCount": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/lives/{liveId}/reminder": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Creates or updates a reminder set to 10 minutes before scheduledStartAt.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Enable reminder for a live",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "isReminderEnabled": {
+                                                    "type": "boolean"
+                                                },
+                                                "liveId": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Removes the reminder for the current user.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Disable reminder for a live",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "isReminderEnabled": {
+                                                    "type": "boolean"
+                                                },
+                                                "liveId": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/lives/{liveId}/renew-token": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Called when the Agora SDK fires token-privilege-will-expire. Pass the same uid that was returned by /join.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives"
+                ],
+                "summary": "Renew an Agora RTC token (student)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "UID to renew",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RenewTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "rtcToken": {
+                                                    "type": "string"
+                                                },
+                                                "tokenExpireAt": {
+                                                    "type": "string"
+                                                },
+                                                "uid": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Missing uid",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/teacher/lives/{liveId}/end": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Changes live status to 'ended' and stamps ended_at. Teacher must own the live.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives-teacher"
+                ],
+                "summary": "Teacher ends a live session",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "liveId": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Teacher does not own this live",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/teacher/lives/{liveId}/start": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Changes live status to 'live', generates two RTC tokens (camera uid=1000, screen uid=2000) for the teacher. Teacher must own the live (teacherId must match).",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "lives-teacher"
+                ],
+                "summary": "Teacher starts a live session",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Live ID",
+                        "name": "liveId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "agora": {
+                                                    "type": "object"
+                                                },
+                                                "courseId": {
+                                                    "type": "string"
+                                                },
+                                                "liveId": {
+                                                    "type": "string"
+                                                },
+                                                "streams": {
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Teacher does not own this live",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Live not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -691,13 +1362,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/v1.BaseResponse"
+                                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/responses.UserResponse"
+                                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse"
                                         }
                                     }
                                 }
@@ -707,13 +1378,13 @@
                     "401": {
                         "description": "Missing or invalid token",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "404": {
                         "description": "User no longer exists",
                         "schema": {
-                            "$ref": "#/definitions/v1.BaseResponse"
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     }
                 }
@@ -721,7 +1392,7 @@
         }
     },
     "definitions": {
-        "requests.ChangePasswordRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ChangePasswordRequest": {
             "type": "object",
             "required": [
                 "current_password",
@@ -740,7 +1411,7 @@
                 }
             }
         },
-        "requests.ForgotPasswordRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ForgotPasswordRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -752,7 +1423,28 @@
                 }
             }
         },
-        "requests.LoginRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.JoinLiveRequest": {
+            "type": "object",
+            "properties": {
+                "clientType": {
+                    "type": "string",
+                    "example": "android"
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LeaveLiveRequest": {
+            "type": "object",
+            "required": [
+                "uid"
+            ],
+            "properties": {
+                "uid": {
+                    "type": "integer",
+                    "example": 10042
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.LoginRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -770,7 +1462,7 @@
                 }
             }
         },
-        "requests.RefreshRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RefreshRequest": {
             "type": "object",
             "required": [
                 "refresh_token"
@@ -781,7 +1473,7 @@
                 }
             }
         },
-        "requests.RegisterRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RegisterRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -824,7 +1516,19 @@
                 }
             }
         },
-        "requests.ResetPasswordRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.RenewTokenRequest": {
+            "type": "object",
+            "required": [
+                "uid"
+            ],
+            "properties": {
+                "uid": {
+                    "type": "integer",
+                    "example": 10042
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest": {
             "type": "object",
             "required": [
                 "new_password",
@@ -841,7 +1545,7 @@
                 }
             }
         },
-        "requests.SendOTPRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.SendOTPRequest": {
             "type": "object",
             "required": [
                 "email"
@@ -853,7 +1557,7 @@
                 }
             }
         },
-        "requests.VerifyOTPRequest": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -869,7 +1573,91 @@
                 }
             }
         },
-        "responses.UserResponse": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.LiveCourseResponse": {
+            "type": "object",
+            "properties": {
+                "canJoin": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "category": {
+                    "type": "string",
+                    "example": "語言學習"
+                },
+                "courseId": {
+                    "type": "string",
+                    "example": "course_ielts_001"
+                },
+                "courseType": {
+                    "type": "string",
+                    "example": "required"
+                },
+                "endedAt": {
+                    "type": "string"
+                },
+                "isReminderEnabled": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "level": {
+                    "type": "string",
+                    "example": "A2"
+                },
+                "liveId": {
+                    "type": "string",
+                    "example": "live_20260618_1900_001"
+                },
+                "scheduledStartAt": {
+                    "type": "string",
+                    "example": "2026-06-18T19:00:00+08:00"
+                },
+                "startedAt": {
+                    "type": "string",
+                    "example": "2026-06-18T19:02:00+08:00"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "scheduled"
+                },
+                "teacher": {
+                    "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.TeacherResponse"
+                },
+                "textbookUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/textbooks/ielts_001.pdf"
+                },
+                "thumbnailUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/courses/ielts_001.jpg"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "雅思閱讀[一般訓練組] - 段落標題-複習篇"
+                },
+                "viewerCount": {
+                    "type": "integer",
+                    "example": 42
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.TeacherResponse": {
+            "type": "object",
+            "properties": {
+                "avatarUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/teachers/ben.jpg"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Ben"
+                },
+                "teacherId": {
+                    "type": "string",
+                    "example": "teacher_ben"
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_responses.UserResponse": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -907,7 +1695,7 @@
                 }
             }
         },
-        "v1.BaseResponse": {
+        "github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse": {
             "type": "object",
             "properties": {
                 "data": {},

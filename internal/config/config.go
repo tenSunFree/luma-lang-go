@@ -51,6 +51,11 @@ type Config struct {
 	REDISExpired  int    `mapstructure:"REDIS_EXPIRED"`
 
 	AllowedOrigins string `mapstructure:"ALLOWED_ORIGINS"`
+
+	AgoraAppID              string `mapstructure:"AGORA_APP_ID"`
+	AgoraAppCertificate     string `mapstructure:"AGORA_APP_CERTIFICATE"`
+	AgoraRTCTokenTTLSeconds int    `mapstructure:"AGORA_RTC_TOKEN_TTL_SECONDS"`
+	WsBaseURL               string `mapstructure:"WS_BASE_URL"`
 }
 
 // AllowedOriginsList returns CORS origins as a slice. Defaults to ["*"] only when empty AND environment is not production.
@@ -180,5 +185,11 @@ func applyDefaults() {
 	// no exporter the ratio is irrelevant (noop provider).
 	if AppConfig.OTelSampleRatio == 0 && AppConfig.OTelExporter != "" {
 		AppConfig.OTelSampleRatio = 1.0
+	}
+	if AppConfig.AgoraRTCTokenTTLSeconds == 0 {
+		AppConfig.AgoraRTCTokenTTLSeconds = 7200
+	}
+	if AppConfig.WsBaseURL == "" {
+		AppConfig.WsBaseURL = "wss://api.example.com"
 	}
 }
