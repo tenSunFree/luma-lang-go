@@ -42,6 +42,38 @@ It can serve as the Android / iOS client-side foundation for connecting to RESTf
 
 ## Features
 
+### Authentication & Account Security
+- JWT-based login with access/refresh token support and refresh token rotation
+- Account registration with email-based OTP verification before activation
+- Forgot and reset password flow using time-limited reset tokens delivered via async email dispatch
+- Change password endpoint with old-password verification
+- Audit logging for auth-sensitive actions
+
+### Live Course Sessions
+- Real-time live class support powered by Agora RTC, with per-user UID allocation and RTC token generation on join
+- Live join response includes teacher camera/screen stream UIDs and WebSocket chat configuration
+- Live course listing filterable by status (`scheduled`, `live`, `ended`, `cancelled`)
+- Per-user reminder state reflected in the live course list response
+
+### Content Delivery
+- Language lesson/content listing, full-text search, and detail retrieval
+- Two-layer caching with in-process Ristretto cache backed by Redis to reduce redundant Postgres queries
+- Pagination support across content and user listing endpoints
+- Database seeding and JSON-based content import/export tooling for populating lesson data
+
+### Observability & Reliability
+- Prometheus metrics for cache behavior, mailer outcomes, and Postgres connection pool usage
+- Distributed tracing across HTTP and usecase layers
+- Structured logging with Zap, request-scoped fields, request IDs, and access logs
+- Per-IP rate limiting, request body size limits, and security headers via middleware
+
+### API & Engineering Practices
+- RESTful API built with Gin and documented via generated Swagger/OpenAPI specs
+- Clean Architecture: handlers → usecases → repositories, with interfaces decoupling business logic from Postgres/sqlx
+- Versioned SQL migrations with a dedicated CLI (`cmd/migration`)
+- Unit tests, end-to-end tests, and Testcontainers-based integration tests for Postgres and Redis flows
+- CI pipeline and local check scripts covering linting, tests, integration tests, Swagger drift checks, and binary builds
+
 ---
 
 ## Tech Stack
