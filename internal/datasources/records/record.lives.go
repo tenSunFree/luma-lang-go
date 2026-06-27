@@ -23,6 +23,8 @@ type LiveCourse struct {
 	AgoraChannelName string     `db:"agora_channel_name"`
 	TeacherCameraUID int        `db:"teacher_camera_uid"`
 	TeacherScreenUID int        `db:"teacher_screen_uid"`
+	CreatedAt        time.Time  `db:"created_at"`
+	UpdatedAt        time.Time  `db:"updated_at"`
 	// The following two are calculated fields added during querying and need to be provided as subqueries in the SELECT statement.
 	ViewerCount       int  `db:"viewer_count"`
 	IsReminderEnabled bool `db:"is_reminder_enabled"`
