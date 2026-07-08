@@ -198,35 +198,35 @@ func (uc *usecase) StartTeacherLive(ctx context.Context, req StartTeacherLiveReq
 	}
 	// If a live stream is already in progress, generate a new token for that stream and send it back directly (idempotent design).
 	// Generate a universal token using uid=0; both camera (uid=1000) and screen (uid=2000) can use it.
-    broadcasterToken, err := uc.tokenService.BuildRTCToken(live.AgoraChannelName, 0, RoleBroadcaster)
-    if err != nil {
-        return StartTeacherLiveResponse{}, apperror.InternalCause(fmt.Errorf("build broadcaster token: %w", err))
-    }
+	broadcasterToken, err := uc.tokenService.BuildRTCToken(live.AgoraChannelName, 0, RoleBroadcaster)
+	if err != nil {
+		return StartTeacherLiveResponse{}, apperror.InternalCause(fmt.Errorf("build broadcaster token: %w", err))
+	}
 
-    _ = uc.repo.UpsertParticipant(ctx, UpsertParticipantInput{
-        LiveID:      live.LiveID,
-        UserID:      live.TeacherID,
-        DisplayName: live.TeacherName,
-        AvatarURL:   live.TeacherAvatarURL,
-        AgoraUID:    live.TeacherCameraUID,
-        Role:        RoleTeacher,
-    })
+	_ = uc.repo.UpsertParticipant(ctx, UpsertParticipantInput{
+		LiveID:      live.LiveID,
+		UserID:      live.TeacherID,
+		DisplayName: live.TeacherName,
+		AvatarURL:   live.TeacherAvatarURL,
+		AgoraUID:    live.TeacherCameraUID,
+		Role:        RoleTeacher,
+	})
 
-    return StartTeacherLiveResponse{
-        LiveID:   live.LiveID,
-        CourseID: live.CourseID,
-        Agora: TeacherAgoraConfig{
-            AppID:         uc.appID,
-            ChannelName:   live.AgoraChannelName,
-            Role:          RoleBroadcaster,
-            TokenExpireAt: broadcasterToken.ExpireAt,
-        },
-        // For the same token, each uid corresponds to a different one
-        Streams: TeacherStreamsToken{
-            Camera: TeacherStreamToken{UID: live.TeacherCameraUID, RTCToken: broadcasterToken.Token},
-            Screen: TeacherStreamToken{UID: live.TeacherScreenUID, RTCToken: broadcasterToken.Token},
-        },
-    }, nil
+	return StartTeacherLiveResponse{
+		LiveID:   live.LiveID,
+		CourseID: live.CourseID,
+		Agora: TeacherAgoraConfig{
+			AppID:         uc.appID,
+			ChannelName:   live.AgoraChannelName,
+			Role:          RoleBroadcaster,
+			TokenExpireAt: broadcasterToken.ExpireAt,
+		},
+		// For the same token, each uid corresponds to a different one
+		Streams: TeacherStreamsToken{
+			Camera: TeacherStreamToken{UID: live.TeacherCameraUID, RTCToken: broadcasterToken.Token},
+			Screen: TeacherStreamToken{UID: live.TeacherScreenUID, RTCToken: broadcasterToken.Token},
+		},
+	}, nil
 }
 
 // EndTeacherLive Ends the teacher's current live stream and returns the ended liveId.

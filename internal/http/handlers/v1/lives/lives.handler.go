@@ -271,7 +271,7 @@ func (h Handler) StartTeacherLive(ctx *gin.Context) {
 
 	resp, err := h.usecase.StartTeacherLive(ctx.Request.Context(), livesuc.StartTeacherLiveRequest{
 		TeacherID:    user.ID,
-		TeacherName:  user.Email,  // Use email for now, you can change it later to retrieve username from the users table.
+		TeacherName:  user.Email, // Use email for now, you can change it later to retrieve username from the users table.
 		Title:        req.Title,
 		Category:     req.Category,
 		Level:        req.Level,
