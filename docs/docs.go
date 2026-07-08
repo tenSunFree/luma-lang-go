@@ -1196,30 +1196,21 @@ const docTemplate = `{
                 }
             }
         },
-        "/teacher/lives/{liveId}/end": {
+        "/teacher/lives/end": {
             "post": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Changes live status to 'ended' and stamps ended_at. Teacher must own the live.",
+                "description": "Ends the teacher's currently active live session (status=live). No body needed; the backend finds the active live by teacher identity from the JWT.",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "lives-teacher"
                 ],
-                "summary": "Teacher ends a live session",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Live ID",
-                        "name": "liveId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
+                "summary": "Teacher ends current live session",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1250,14 +1241,8 @@ const docTemplate = `{
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
-                    "403": {
-                        "description": "Teacher does not own this live",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
-                        }
-                    },
                     "404": {
-                        "description": "Live not found",
+                        "description": "No active live found",
                         "schema": {
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
@@ -1265,28 +1250,33 @@ const docTemplate = `{
                 }
             }
         },
-        "/teacher/lives/{liveId}/start": {
+        "/teacher/lives/start": {
             "post": {
                 "security": [
                     {
                         "BearerAuth": []
                     }
                 ],
-                "description": "Changes live status to 'live', generates two RTC tokens (camera uid=1000, screen uid=2000) for the teacher. Teacher must own the live (teacherId must match).",
+                "description": "One-shot API: creates the live_course record, sets status to live, and returns Agora RTC tokens for camera (uid=1000) and screen (uid=2000). If the teacher already has an active live, returns a new token for that live instead (idempotent).",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "lives-teacher"
                 ],
-                "summary": "Teacher starts a live session",
+                "summary": "Teacher creates a live room and starts broadcasting",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Live ID",
-                        "name": "liveId",
-                        "in": "path",
-                        "required": true
+                        "description": "Live room info",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.StartTeacherLiveRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1322,20 +1312,14 @@ const docTemplate = `{
                             ]
                         }
                     },
+                    "400": {
+                        "description": "Missing required fields",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "Teacher does not own this live",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "Live not found",
                         "schema": {
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
@@ -1556,6 +1540,38 @@ const docTemplate = `{
                 "email": {
                     "type": "string",
                     "maxLength": 50
+                }
+            }
+        },
+        "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.StartTeacherLiveRequest": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "example": "語言學習"
+                },
+                "courseType": {
+                    "type": "string",
+                    "example": "live"
+                },
+                "level": {
+                    "type": "string",
+                    "example": "A2"
+                },
+                "textbookUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/book.pdf"
+                },
+                "thumbnailUrl": {
+                    "type": "string",
+                    "example": "https://cdn.example.com/thumb.jpg"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "雅思閱讀 - 即時直播課"
                 }
             }
         },

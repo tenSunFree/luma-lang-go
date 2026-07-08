@@ -36,8 +36,8 @@ func (r *livesRoute) Routes() {
 	lives.POST("/reminder", r.handler.SetReminder)
 	lives.DELETE("/reminder", r.handler.DeleteReminder)
 
-	// Teacher's end
-	teacher := v1.Group("/teacher/lives/:liveId")
+	// Teacher side (liveId path param is no longer needed)
+	teacher := v1.Group("/teacher/lives")
 	teacher.Use(r.authMiddleware)
 	teacher.POST("/start", r.handler.StartTeacherLive)
 	teacher.POST("/end", r.handler.EndTeacherLive)

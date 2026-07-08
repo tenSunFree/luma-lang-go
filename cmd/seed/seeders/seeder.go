@@ -12,6 +12,7 @@ import (
 
 type Seeder interface {
 	UserSeeder(userData []records.Users) (err error)
+	LiveCourseSeeder() (err error)
 }
 
 type seeder struct {
@@ -41,7 +42,11 @@ func (s *seeder) UserSeeder(userData []records.Users) (err error) {
 
 	for _, user := range userData {
 		user.CreatedAt = time.Now().UTC()
-		if _, err = tx.NamedQuery(`INSERT INTO users(id, username, email, password, active, role_id, created_at) VALUES (uuid_generate_v4(), :username, :email, :password, :active, :role_id, :created_at)`, user); err != nil {
+		if _, err = tx.NamedExec(`
+    		INSERT INTO users(id, username, email, password, active, role_id, created_at)
+    		VALUES (uuid_generate_v4(), :username, :email, :password, :active, :role_id, :created_at)
+    		ON CONFLICT (email) WHERE deleted_at IS NULL DO NOTHING
+    	`, user); err != nil {
 			return err
 		}
 	}

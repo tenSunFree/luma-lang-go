@@ -7,6 +7,8 @@
 // constants should hold actual constants, not domain types.
 package apperror
 
+import "errors"
+
 // ErrorType represents the category of a domain error.
 type ErrorType int
 
@@ -67,4 +69,17 @@ func InternalCause(cause error) *DomainError {
 		Message: "internal server error",
 		Cause:   cause,
 	}
+}
+
+// IsNotFound returns true if err is a DomainError with type ErrTypeNotFound.
+// Use this in usecase logic to branch on "not found" without importing errors package.
+func IsNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	var domErr *DomainError
+	if errors.As(err, &domErr) {
+		return domErr.Type == ErrTypeNotFound
+	}
+	return false
 }

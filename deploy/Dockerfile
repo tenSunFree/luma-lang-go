@@ -34,6 +34,11 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     go build -trimpath -ldflags="-s -w" -o /out/migrate ./cmd/migration
 
+# Added: Includes seed CLI in the same image for easier execution using docker compose run.
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    go build -trimpath -ldflags="-s -w" -o /out/seed ./cmd/seed
+
 # ---------- runtime ----------
 # Distroless static: no shell, no package manager, nonroot user baked in.
 # ~2 MB base vs ~8 MB for alpine. No apt/apk surface to patch either.
@@ -43,6 +48,7 @@ WORKDIR /app
 
 COPY --from=builder /out/api      /app/api
 COPY --from=builder /out/migrate  /app/migrate
+COPY --from=builder /out/seed     /app/seed
 COPY --from=builder /app/cmd/migration/migrations /app/cmd/migration/migrations
 
 USER nonroot:nonroot

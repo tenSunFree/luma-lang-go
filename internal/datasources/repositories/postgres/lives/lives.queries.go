@@ -239,3 +239,92 @@ func normalizeStatuses(raw []string) []string {
 	}
 	return out
 }
+
+func (r *postgreLiveRepository) CreateTeacherLive(ctx context.Context, in livesuc.CreateTeacherLiveInput) (livesuc.LiveCourse, error) {
+	var row records.LiveCourse
+	err := r.conn.GetContext(ctx, &row, `
+		INSERT INTO live_courses (
+			id, course_id, title, category, level, course_type,
+			status, scheduled_start_at, started_at,
+			teacher_id, teacher_name, teacher_avatar_url,
+			thumbnail_url, textbook_url,
+			agora_channel_name, teacher_camera_uid, teacher_screen_uid,
+			created_at, updated_at
+		) VALUES (
+			$1, $2, $3, $4, $5, $6,
+			'live', now(), now(),
+			$7, $8, $9,
+			$10, $11,
+			$12, $13, $14,
+			now(), now()
+		)
+		RETURNING
+			id, course_id, title, category, level, course_type,
+			status, scheduled_start_at, started_at, ended_at,
+			teacher_id, teacher_name, teacher_avatar_url,
+			thumbnail_url, textbook_url,
+			agora_channel_name, teacher_camera_uid, teacher_screen_uid,
+			created_at, updated_at,
+			0::int AS viewer_count,
+			false AS is_reminder_enabled
+	`,
+		in.LiveID, in.CourseID, in.Title, in.Category, in.Level, in.CourseType,
+		in.TeacherID, in.TeacherName, in.AvatarURL,
+		in.ThumbnailURL, in.TextbookURL,
+		in.AgoraChannelName, in.TeacherCameraUID, in.TeacherScreenUID,
+	)
+	if err != nil {
+		return livesuc.LiveCourse{}, fmt.Errorf("create teacher live: %w", err)
+	}
+	return toUsecaseLiveCourse(row), nil
+}
+
+func (r *postgreLiveRepository) GetActiveLiveByTeacherID(ctx context.Context, teacherID string) (livesuc.LiveCourse, error) {
+	var row records.LiveCourse
+	err := r.conn.GetContext(ctx, &row, `
+		SELECT
+			lc.*,
+			(
+				SELECT COUNT(*)
+				FROM live_participants lp
+				WHERE lp.live_id = lc.id AND lp.left_at IS NULL
+			)::int AS viewer_count,
+			false AS is_reminder_enabled
+		FROM live_courses lc
+		WHERE lc.teacher_id = $1
+		  AND lc.status = 'live'
+		ORDER BY lc.started_at DESC
+		LIMIT 1
+	`, teacherID)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return livesuc.LiveCourse{}, apperror.NotFound("no active live found for teacher")
+		}
+		return livesuc.LiveCourse{}, err
+	}
+	return toUsecaseLiveCourse(row), nil
+}
+
+func (r *postgreLiveRepository) MarkTeacherActiveLiveEnded(ctx context.Context, teacherID string) (string, error) {
+	var liveID string
+	err := r.conn.GetContext(ctx, &liveID, `
+		UPDATE live_courses
+		SET status = 'ended',
+		    ended_at = COALESCE(ended_at, now()),
+		    updated_at = now()
+		WHERE id = (
+			SELECT id FROM live_courses
+			WHERE teacher_id = $1 AND status = 'live'
+			ORDER BY started_at DESC
+			LIMIT 1
+		)
+		RETURNING id
+	`, teacherID)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", apperror.NotFound("no active live found for teacher")
+		}
+		return "", err
+	}
+	return liveID, nil
+}

@@ -117,6 +117,29 @@ definitions:
     required:
     - email
     type: object
+  github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.StartTeacherLiveRequest:
+    properties:
+      category:
+        example: 語言學習
+        type: string
+      courseType:
+        example: live
+        type: string
+      level:
+        example: A2
+        type: string
+      textbookUrl:
+        example: https://cdn.example.com/book.pdf
+        type: string
+      thumbnailUrl:
+        example: https://cdn.example.com/thumb.jpg
+        type: string
+      title:
+        example: 雅思閱讀 - 即時直播課
+        type: string
+    required:
+    - title
+    type: object
   github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.VerifyOTPRequest:
     properties:
       code:
@@ -994,16 +1017,11 @@ paths:
       summary: Renew an Agora RTC token (student)
       tags:
       - lives
-  /teacher/lives/{liveId}/end:
+  /teacher/lives/end:
     post:
-      description: Changes live status to 'ended' and stamps ended_at. Teacher must
-        own the live.
-      parameters:
-      - description: Live ID
-        in: path
-        name: liveId
-        required: true
-        type: string
+      description: Ends the teacher's currently active live session (status=live).
+        No body needed; the backend finds the active live by teacher identity from
+        the JWT.
       produces:
       - application/json
       responses:
@@ -1023,30 +1041,30 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
-        "403":
-          description: Teacher does not own this live
-          schema:
-            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "404":
-          description: Live not found
+          description: No active live found
           schema:
             $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       security:
       - BearerAuth: []
-      summary: Teacher ends a live session
+      summary: Teacher ends current live session
       tags:
       - lives-teacher
-  /teacher/lives/{liveId}/start:
+  /teacher/lives/start:
     post:
-      description: Changes live status to 'live', generates two RTC tokens (camera
-        uid=1000, screen uid=2000) for the teacher. Teacher must own the live (teacherId
-        must match).
+      consumes:
+      - application/json
+      description: 'One-shot API: creates the live_course record, sets status to live,
+        and returns Agora RTC tokens for camera (uid=1000) and screen (uid=2000).
+        If the teacher already has an active live, returns a new token for that live
+        instead (idempotent).'
       parameters:
-      - description: Live ID
-        in: path
-        name: liveId
+      - description: Live room info
+        in: body
+        name: request
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.StartTeacherLiveRequest'
       produces:
       - application/json
       responses:
@@ -1068,21 +1086,17 @@ paths:
                       type: object
                   type: object
               type: object
+        "400":
+          description: Missing required fields
+          schema:
+            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
         "401":
           description: Unauthorized
           schema:
             $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
-        "403":
-          description: Teacher does not own this live
-          schema:
-            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
-        "404":
-          description: Live not found
-          schema:
-            $ref: '#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse'
       security:
       - BearerAuth: []
-      summary: Teacher starts a live session
+      summary: Teacher creates a live room and starts broadcasting
       tags:
       - lives-teacher
   /users/me:

@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS idx_live_courses_one_active_live_per_teacher;

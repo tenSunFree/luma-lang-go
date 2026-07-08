@@ -146,61 +146,92 @@ func (uc *usecase) GetParticipants(ctx context.Context, req GetParticipantsReque
 	}, nil
 }
 
+// StartTeacherLive: Teachers directly create and start a live stream room.
+// If the teacher already has a live stream in progress, they directly send back a new token for that session (without creating a duplicate token).
 func (uc *usecase) StartTeacherLive(ctx context.Context, req StartTeacherLiveRequest) (StartTeacherLiveResponse, error) {
-	// 先驗身份再改狀態（修正方案二的邏輯順序錯誤）
-	live, err := uc.repo.GetLiveByID(ctx, req.LiveID)
+	// First check if the teacher already has a live stream in progress.
+	live, err := uc.repo.GetActiveLiveByTeacherID(ctx, req.TeacherID)
 	if err != nil {
-		return StartTeacherLiveResponse{}, err
-	}
-	if live.TeacherID != req.TeacherID {
-		return StartTeacherLiveResponse{}, apperror.Forbidden("teacher does not own this live")
-	}
+		// No live stream in progress → Create a new one
+		if !apperror.IsNotFound(err) {
+			return StartTeacherLiveResponse{}, err
+		}
 
-	if err := uc.repo.MarkLiveStarted(ctx, req.LiveID); err != nil {
-		return StartTeacherLiveResponse{}, err
-	}
+		now := time.Now()
+		suffix := fmt.Sprintf("%d%d%d_%d%d%d_%d",
+			now.Year(), now.Month(), now.Day(),
+			now.Hour(), now.Minute(), now.Second(),
+			now.UnixNano()%1000000,
+		)
+		liveID := "live_" + suffix
+		courseID := "course_live_" + suffix
+		channelName := "ch_" + suffix
 
-	cameraToken, err := uc.tokenService.BuildRTCToken(live.AgoraChannelName, live.TeacherCameraUID, RoleBroadcaster)
-	if err != nil {
-		return StartTeacherLiveResponse{}, apperror.InternalCause(fmt.Errorf("build camera token: %w", err))
-	}
-	screenToken, err := uc.tokenService.BuildRTCToken(live.AgoraChannelName, live.TeacherScreenUID, RoleBroadcaster)
-	if err != nil {
-		return StartTeacherLiveResponse{}, apperror.InternalCause(fmt.Errorf("build screen token: %w", err))
-	}
+		courseType := req.CourseType
+		if courseType == "" {
+			courseType = "live"
+		}
+		category := req.Category
+		if category == "" {
+			category = "直播課"
+		}
 
-	// 把老師自己也記錄進 participants
-	_ = uc.repo.UpsertParticipant(ctx, UpsertParticipantInput{
-		LiveID: live.LiveID, UserID: live.TeacherID,
-		DisplayName: live.TeacherName, AvatarURL: live.TeacherAvatarURL,
-		AgoraUID: live.TeacherCameraUID, Role: RoleTeacher,
-	})
+		live, err = uc.repo.CreateTeacherLive(ctx, CreateTeacherLiveInput{
+			LiveID:           liveID,
+			CourseID:         courseID,
+			Title:            req.Title,
+			Category:         category,
+			Level:            req.Level,
+			CourseType:       courseType,
+			TeacherID:        req.TeacherID,
+			TeacherName:      req.TeacherName,
+			AvatarURL:        req.AvatarURL,
+			ThumbnailURL:     req.ThumbnailURL,
+			TextbookURL:      req.TextbookURL,
+			AgoraChannelName: channelName,
+			TeacherCameraUID: TeacherCameraUID,
+			TeacherScreenUID: TeacherScreenUID,
+		})
+		if err != nil {
+			return StartTeacherLiveResponse{}, err
+		}
+	}
+	// If a live stream is already in progress, generate a new token for that stream and send it back directly (idempotent design).
+	// Generate a universal token using uid=0; both camera (uid=1000) and screen (uid=2000) can use it.
+    broadcasterToken, err := uc.tokenService.BuildRTCToken(live.AgoraChannelName, 0, RoleBroadcaster)
+    if err != nil {
+        return StartTeacherLiveResponse{}, apperror.InternalCause(fmt.Errorf("build broadcaster token: %w", err))
+    }
 
-	return StartTeacherLiveResponse{
-		LiveID:   live.LiveID,
-		CourseID: live.CourseID,
-		Agora: TeacherAgoraConfig{
-			AppID:         uc.appID,
-			ChannelName:   live.AgoraChannelName,
-			Role:          RoleBroadcaster,
-			TokenExpireAt: cameraToken.ExpireAt,
-		},
-		Streams: TeacherStreamsToken{
-			Camera: TeacherStreamToken{UID: live.TeacherCameraUID, RTCToken: cameraToken.Token},
-			Screen: TeacherStreamToken{UID: live.TeacherScreenUID, RTCToken: screenToken.Token},
-		},
-	}, nil
+    _ = uc.repo.UpsertParticipant(ctx, UpsertParticipantInput{
+        LiveID:      live.LiveID,
+        UserID:      live.TeacherID,
+        DisplayName: live.TeacherName,
+        AvatarURL:   live.TeacherAvatarURL,
+        AgoraUID:    live.TeacherCameraUID,
+        Role:        RoleTeacher,
+    })
+
+    return StartTeacherLiveResponse{
+        LiveID:   live.LiveID,
+        CourseID: live.CourseID,
+        Agora: TeacherAgoraConfig{
+            AppID:         uc.appID,
+            ChannelName:   live.AgoraChannelName,
+            Role:          RoleBroadcaster,
+            TokenExpireAt: broadcasterToken.ExpireAt,
+        },
+        // For the same token, each uid corresponds to a different one
+        Streams: TeacherStreamsToken{
+            Camera: TeacherStreamToken{UID: live.TeacherCameraUID, RTCToken: broadcasterToken.Token},
+            Screen: TeacherStreamToken{UID: live.TeacherScreenUID, RTCToken: broadcasterToken.Token},
+        },
+    }, nil
 }
 
-func (uc *usecase) EndTeacherLive(ctx context.Context, req EndTeacherLiveRequest) error {
-	live, err := uc.repo.GetLiveByID(ctx, req.LiveID)
-	if err != nil {
-		return err
-	}
-	if live.TeacherID != req.TeacherID {
-		return apperror.Forbidden("teacher does not own this live")
-	}
-	return uc.repo.MarkLiveEnded(ctx, req.LiveID)
+// EndTeacherLive Ends the teacher's current live stream and returns the ended liveId.
+func (uc *usecase) EndTeacherLive(ctx context.Context, req EndTeacherLiveRequest) (string, error) {
+	return uc.repo.MarkTeacherActiveLiveEnded(ctx, req.TeacherID)
 }
 
 func (uc *usecase) SetReminder(ctx context.Context, req SetReminderRequest) (ReminderResponse, error) {

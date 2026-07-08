@@ -31,5 +31,10 @@ func main() {
 		logger.Panic(err.Error(), logger.Fields{constants.LoggerCategory: constants.LoggerCategorySeeder})
 	}
 
+	err = seeder.LiveCourseSeeder()
+	if err != nil {
+		logger.Panic(err.Error(), logger.Fields{constants.LoggerCategory: constants.LoggerCategorySeeder})
+	}
+
 	logger.Info("seeding success!", logger.Fields{constants.LoggerCategory: constants.LoggerCategorySeeder})
 }

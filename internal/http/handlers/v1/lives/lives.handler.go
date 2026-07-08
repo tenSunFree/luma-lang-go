@@ -245,26 +245,39 @@ func (h Handler) DeleteReminder(ctx *gin.Context) {
 }
 
 // StartTeacherLive godoc
-// @Summary      Teacher starts a live session
-// @Description  Changes live status to 'live', generates two RTC tokens (camera uid=1000, screen uid=2000) for the teacher. Teacher must own the live (teacherId must match).
+// @Summary      Teacher creates a live room and starts broadcasting
+// @Description  One-shot API: creates the live_course record, sets status to live, and returns Agora RTC tokens for camera (uid=1000) and screen (uid=2000). If the teacher already has an active live, returns a new token for that live instead (idempotent).
 // @Tags         lives-teacher
+// @Accept       json
 // @Produce      json
-// @Param        liveId  path      string  true  "Live ID"
-// @Success      200     {object}  v1.BaseResponse{data=object{liveId=string,courseId=string,agora=object,streams=object}}
-// @Failure      401     {object}  v1.BaseResponse
-// @Failure      403     {object}  v1.BaseResponse  "Teacher does not own this live"
-// @Failure      404     {object}  v1.BaseResponse  "Live not found"
+// @Param        request  body      requests.StartTeacherLiveRequest  true  "Live room info"
+// @Success      200      {object}  v1.BaseResponse{data=object{liveId=string,courseId=string,agora=object,streams=object}}
+// @Failure      400      {object}  v1.BaseResponse  "Missing required fields"
+// @Failure      401      {object}  v1.BaseResponse
 // @Security     BearerAuth
-// @Router       /teacher/lives/{liveId}/start [post]
+// @Router       /teacher/lives/start [post]
 func (h Handler) StartTeacherLive(ctx *gin.Context) {
 	user, err := httpauth.CurrentUserFromContext(ctx)
 	if err != nil {
 		v1.NewAbortResponse(ctx, err.Error())
 		return
 	}
+
+	var req requests.StartTeacherLiveRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		v1.NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	resp, err := h.usecase.StartTeacherLive(ctx.Request.Context(), livesuc.StartTeacherLiveRequest{
-		LiveID:    ctx.Param("liveId"),
-		TeacherID: user.ID,
+		TeacherID:    user.ID,
+		TeacherName:  user.Email,  // Use email for now, you can change it later to retrieve username from the users table.
+		Title:        req.Title,
+		Category:     req.Category,
+		Level:        req.Level,
+		CourseType:   req.CourseType,
+		ThumbnailURL: req.ThumbnailURL,
+		TextbookURL:  req.TextbookURL,
 	})
 	if err != nil {
 		v1.RespondWithError(ctx, err)
@@ -274,35 +287,33 @@ func (h Handler) StartTeacherLive(ctx *gin.Context) {
 }
 
 // EndTeacherLive godoc
-// @Summary      Teacher ends a live session
-// @Description  Changes live status to 'ended' and stamps ended_at. Teacher must own the live.
+// @Summary      Teacher ends current live session
+// @Description  Ends the teacher's currently active live session (status=live). No body needed; the backend finds the active live by teacher identity from the JWT.
 // @Tags         lives-teacher
 // @Produce      json
-// @Param        liveId  path      string  true  "Live ID"
-// @Success      200     {object}  v1.BaseResponse{data=object{liveId=string}}
-// @Failure      401     {object}  v1.BaseResponse
-// @Failure      403     {object}  v1.BaseResponse  "Teacher does not own this live"
-// @Failure      404     {object}  v1.BaseResponse  "Live not found"
+// @Success      200  {object}  v1.BaseResponse{data=object{liveId=string}}
+// @Failure      401  {object}  v1.BaseResponse
+// @Failure      404  {object}  v1.BaseResponse  "No active live found"
 // @Security     BearerAuth
-// @Router       /teacher/lives/{liveId}/end [post]
+// @Router       /teacher/lives/end [post]
 func (h Handler) EndTeacherLive(ctx *gin.Context) {
 	user, err := httpauth.CurrentUserFromContext(ctx)
 	if err != nil {
 		v1.NewAbortResponse(ctx, err.Error())
 		return
 	}
-	if err := h.usecase.EndTeacherLive(ctx.Request.Context(), livesuc.EndTeacherLiveRequest{
-		LiveID:    ctx.Param("liveId"),
+
+	liveID, err := h.usecase.EndTeacherLive(ctx.Request.Context(), livesuc.EndTeacherLiveRequest{
 		TeacherID: user.ID,
-	}); err != nil {
+	})
+	if err != nil {
 		v1.RespondWithError(ctx, err)
 		return
 	}
-	v1.NewSuccessResponse(ctx, http.StatusOK, "live ended", gin.H{"liveId": ctx.Param("liveId")})
+	v1.NewSuccessResponse(ctx, http.StatusOK, "live ended", gin.H{"liveId": liveID})
 }
 
-// ---- response 轉換 helpers ----
-
+// Response conversion helpers
 func toJoinResponse(r livesuc.JoinLiveResponse) gin.H {
 	return gin.H{
 		"liveId":   r.LiveID,

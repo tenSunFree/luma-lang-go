@@ -15,8 +15,13 @@ type RenewTokenRequest struct {
 	UID int `json:"uid" binding:"required" example:"10042"`
 }
 
-// TeacherRenewTokenRequest is the body for POST /teacher/lives/:liveId/renew-token.
-type TeacherRenewTokenRequest struct {
-	UID        int    `json:"uid"        example:"1000"`
-	StreamType string `json:"streamType" example:"camera"`
+// StartTeacherLiveRequest is the body for POST /teacher/lives/start.
+// title is required; other fields are optional.
+type StartTeacherLiveRequest struct {
+	Title        string  `json:"title"        binding:"required" example:"雅思閱讀 - 即時直播課"`
+	Category     string  `json:"category"                        example:"語言學習"`
+	Level        string  `json:"level"                           example:"A2"`
+	CourseType   string  `json:"courseType"                      example:"live"`
+	ThumbnailURL *string `json:"thumbnailUrl"                    example:"https://cdn.example.com/thumb.jpg"`
+	TextbookURL  *string `json:"textbookUrl"                     example:"https://cdn.example.com/book.pdf"`
 }
