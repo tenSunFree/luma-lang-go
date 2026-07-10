@@ -18,8 +18,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"sort"
+	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -108,38 +111,57 @@ func startPostgres(t *testing.T, runMigrations bool) *sqlx.DB {
 	return db
 }
 
-// applyMigrations runs every .up.sql file in lexicographic order. Kept
-// inline in the harness rather than reusing cmd/migration so the
-// integration test stays decoupled from the runner's transaction /
-// schema_migrations bookkeeping.
+// applyMigrations runs every .up.sql file sorted by numeric prefix.
+// sort.Strings would put "10_foo" before "2_bar" (lexicographic order);
+// harnessSeq extracts the leading digits so ordering is always
+// 1 → 2 → … → 9 → 10 → 11, regardless of zero-padding.
 func applyMigrations(ctx context.Context, db *sqlx.DB) error {
 	dir := migrationsDir()
 	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return fmt.Errorf("read migrations dir %s: %w", dir, err)
 	}
-	var files []string
+
+	type mf struct {
+		seq  int
+		name string
+	}
+	var files []mf
 	for _, e := range entries {
 		name := e.Name()
-		if filepath.Ext(name) == ".sql" && len(name) > len(".up.sql") && name[len(name)-len(".up.sql"):] == ".up.sql" {
-			files = append(files, name)
+		if !strings.HasSuffix(name, ".up.sql") {
+			continue
 		}
+		files = append(files, mf{seq: harnessSeq(name), name: name})
 	}
-	sort.Strings(files)
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].seq < files[j].seq
+	})
 
-	for _, name := range files {
-		full := filepath.Join(dir, name)
+	for _, f := range files {
+		full := filepath.Join(dir, f.name)
 		// #nosec G304 — `full` is built from a developer-controlled
 		// migrations directory, not request input.
 		data, err := os.ReadFile(full)
 		if err != nil {
-			return fmt.Errorf("read %s: %w", name, err)
+			return fmt.Errorf("read %s: %w", f.name, err)
 		}
 		if _, err := db.ExecContext(ctx, string(data)); err != nil {
-			return fmt.Errorf("exec %s: %w", name, err)
+			return fmt.Errorf("exec %s: %w", f.name, err)
 		}
 	}
 	return nil
+}
+
+var harnessSeqRe = regexp.MustCompile(`^(\d+)_`)
+
+func harnessSeq(name string) int {
+	m := harnessSeqRe.FindStringSubmatch(filepath.Base(name))
+	if len(m) < 2 {
+		return 0
+	}
+	n, _ := strconv.Atoi(m[1])
+	return n
 }
 
 // migrationsDir resolves the project-root migrations directory by

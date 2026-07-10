@@ -11,7 +11,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
+	"strconv"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/snykk/go-rest-boilerplate/internal/constants"
@@ -158,12 +160,32 @@ func (r *Runner) withAdvisoryLock(ctx context.Context, fn func() error) error {
 	return fn()
 }
 
+// migSeqRe extracts the leading digit block from a migration filename.
+// "10_foo.up.sql" → "10", "02_bar.up.sql" → "02"
+var migSeqRe = regexp.MustCompile(`^(\d+)_`)
+
+// migSeq returns the numeric prefix of a migration filename base.
+// Returns 0 for names without a leading number (sorted first, safe).
+func migSeq(path string) int {
+	m := migSeqRe.FindStringSubmatch(filepath.Base(path))
+	if len(m) < 2 {
+		return 0
+	}
+	n, _ := strconv.Atoi(m[1])
+	return n
+}
+
+// listFiles returns *.{action}.sql files sorted by numeric prefix so
+// "10_foo" always comes after "9_bar", not before it.
+// sort.Strings would give lexicographic order where "10" < "2".
 func (r *Runner) listFiles(action string) ([]string, error) {
 	files, err := filepath.Glob(filepath.Join(r.dir, fmt.Sprintf("*.%s.sql", action)))
 	if err != nil {
 		return nil, errors.New("glob migration files")
 	}
-	sort.Strings(files)
+	sort.Slice(files, func(i, j int) bool {
+		return migSeq(files[i]) < migSeq(files[j])
+	})
 	return files, nil
 }
 
