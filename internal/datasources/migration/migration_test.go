@@ -120,3 +120,41 @@ func TestRunner_AppliesMultipleFilesInOrder(t *testing.T) {
 	require.NoError(t, db.GetContext(ctx, &count, `SELECT COUNT(*) FROM schema_migrations`))
 	assert.Equal(t, 2, count)
 }
+
+// TestRunner_NumericSortOrder guards against the "10 before 2"
+// lexicographic pitfall that caused CI failures when migration 10
+// (which depends on tables from migration 9) was applied before
+// migration 9 under sort.Strings ordering.
+//
+// Setup: migration 1 creates a table, migration 2 adds a column to it,
+// migration 10 inserts a row using that column.
+// If files sort lexicographically (1 → 10 → 2), migration 10 would
+// fail because the column from migration 2 doesn't exist yet.
+func TestRunner_NumericSortOrder(t *testing.T) {
+	r, dir := newRunner(t)
+	ctx := context.Background()
+
+	writeMigration(t, dir, "1",
+		`CREATE TABLE num_sort_base (id SERIAL PRIMARY KEY);`,
+		`DROP TABLE IF EXISTS num_sort_base;`,
+	)
+	// migration 2 adds a column; migration 10 needs this column.
+	// Lexicographic order would run 10 before 2, making 10's INSERT fail.
+	writeMigration(t, dir, "2",
+		`ALTER TABLE num_sort_base ADD COLUMN label TEXT NOT NULL DEFAULT '';`,
+		`ALTER TABLE num_sort_base DROP COLUMN IF EXISTS label;`,
+	)
+	writeMigration(t, dir, "10",
+		`INSERT INTO num_sort_base (label) VALUES ('from-migration-10');`,
+		`DELETE FROM num_sort_base WHERE label = 'from-migration-10';`,
+	)
+
+	require.NoError(t, r.Up(ctx),
+		"numeric sort: migrations must apply in order 1 → 2 → 10, not 1 → 10 → 2")
+
+	db := r.DB()
+	var count int
+	require.NoError(t, db.GetContext(ctx, &count,
+		`SELECT COUNT(*) FROM schema_migrations`))
+	assert.Equal(t, 3, count, "all three migrations must be recorded")
+}

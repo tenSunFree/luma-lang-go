@@ -1,7 +1,8 @@
 MOCKERY_BIN := $(GOPATH)/bin/mockery
 
-.PHONY: serve dev build tidy test test-cover mock mig-up mig-down seed lint fmt docker-up docker-down help \
-	pre-push ci-lint ci-test ci-test-integration ci-swag-check ci-build
+.PHONY: serve dev build tidy test test-cover mock mig-up mig-down seed lint fmt \
+	docker-up docker-down help pre-push install-hooks \
+	ci-lint ci-test ci-test-integration ci-test-migration ci-swag-check ci-build
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -60,6 +61,15 @@ docker-down: ## Stop all Docker Compose services
 
 pre-push: ci-lint ci-test ci-swag-check ci-build ## Mirror CI checks locally before pushing (lint + test + swag drift + build)
 	@echo "All CI checks passed."
+
+install-hooks: ## Install git pre-push hook (run once after cloning)
+	cp scripts/pre-push .git/hooks/pre-push
+	chmod +x .git/hooks/pre-push
+	@echo "Git hooks installed. pre-push will now run checks before every push."
+
+ci-test-migration: ## Run migration integration tests (requires Docker)
+	go test -v -count=1 -tags=integration -timeout=120s \
+		./internal/datasources/migration/...
 
 ci-lint: ## Run golangci-lint matching .github/workflows/ci.yml (auto-installs if missing)
 	@command -v golangci-lint >/dev/null 2>&1 || go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
