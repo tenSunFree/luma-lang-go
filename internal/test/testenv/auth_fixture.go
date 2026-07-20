@@ -116,14 +116,15 @@ func NewAuthFixture(t *testing.T) *AuthFixture {
 		BcryptCost: config.AppConfig.BcryptCost,
 	})
 	authUC := auth.NewUsecase(usersUC, jwtSvc, mailer, redis, auth.Config{
-		OTPMaxAttempts:    5,
-		OTPTTL:            5 * time.Minute,
-		PasswordResetTTL:  30 * time.Minute,
-		BcryptCost:        config.AppConfig.BcryptCost,
-		LoginMaxAttempts:  10,
-		LoginLockoutTTL:   15 * time.Minute,
-		ForgotMaxAttempts: 3,
-		ForgotLockoutTTL:  15 * time.Minute,
+		OTPMaxAttempts:      5,
+		OTPTTL:              5 * time.Minute,
+		PwdResetCodeTTL:     30 * time.Minute,
+		PwdResetMaxAttempts: 5,
+		BcryptCost:          config.AppConfig.BcryptCost,
+		LoginMaxAttempts:    10,
+		LoginLockoutTTL:     15 * time.Minute,
+		ForgotMaxAttempts:   3,
+		ForgotLockoutTTL:    15 * time.Minute,
 	})
 
 	return &AuthFixture{
