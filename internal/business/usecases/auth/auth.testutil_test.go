@@ -30,14 +30,15 @@ func newFixture(t *testing.T) *fixture {
 	redis := mocks.NewRedisCache(t)
 	return &fixture{
 		usecase: auth.NewUsecase(usersUC, jwtSvc, otpMailer, redis, auth.Config{
-			OTPMaxAttempts:    5,
-			OTPTTL:            5 * time.Minute,
-			PasswordResetTTL:  30 * time.Minute,
-			BcryptCost:        bcrypt.MinCost,
-			LoginMaxAttempts:  5,
-			LoginLockoutTTL:   15 * time.Minute,
-			ForgotMaxAttempts: 3,
-			ForgotLockoutTTL:  15 * time.Minute,
+			OTPMaxAttempts:      5,
+			OTPTTL:              5 * time.Minute,
+			PwdResetCodeTTL:     10 * time.Minute,
+			PwdResetMaxAttempts: 5,
+			BcryptCost:          bcrypt.MinCost,
+			LoginMaxAttempts:    5,
+			LoginLockoutTTL:     15 * time.Minute,
+			ForgotMaxAttempts:   3,
+			ForgotLockoutTTL:    15 * time.Minute,
 		}),
 		users:  usersUC,
 		jwt:    jwtSvc,

@@ -22,18 +22,27 @@ func TestForgotPassword(t *testing.T) {
 		wantErrType apperror.ErrorType
 	}{
 		{
-			name:  "happy path increments rate counter, persists token, queues email",
+			name:  "happy path increments rate counter, persists code, queues email",
 			email: "patrick@example.com",
 			setup: func(f *fixture) {
 				f.redis.On("Incr", mock.Anything, "forgot_attempts:patrick@example.com").Return(int64(1), nil).Once()
 				f.redis.On("Expire", mock.Anything, "forgot_attempts:patrick@example.com", mock.AnythingOfType("time.Duration")).Return(nil).Once()
 				f.users.On("GetByEmail", mock.Anything, users.GetByEmailRequest{Email: "patrick@example.com"}).Return(users.GetByEmailResponse{User: activeUser(t)}, nil).Once()
-				f.redis.On("Set", mock.Anything, mock.MatchedBy(func(k string) bool {
-					return len(k) > len("pwd_reset:") && k[:len("pwd_reset:")] == "pwd_reset:"
-				}), "user-1").Return(nil).Once()
-				f.redis.On("Expire", mock.Anything, mock.MatchedBy(func(k string) bool {
-					return len(k) > len("pwd_reset:") && k[:len("pwd_reset:")] == "pwd_reset:"
-				}), mock.AnythingOfType("time.Duration")).Return(nil).Once()
+				// ForgotPassword will clear old code/attempts upon entry, immediately invalidating the old code.
+				f.redis.On("Del", mock.Anything, "pwd_reset_code:patrick@example.com").Return(nil).Once()
+				f.redis.On("Del", mock.Anything, "pwd_reset_attempts:patrick@example.com").Return(nil).Once()
+				f.redis.On("Set", mock.Anything, "pwd_reset_code:patrick@example.com", mock.MatchedBy(func(code string) bool {
+					if len(code) != 6 {
+						return false
+					}
+					for _, c := range code {
+						if c < '0' || c > '9' {
+							return false
+						}
+					}
+					return true
+				})).Return(nil).Once()
+				f.redis.On("Expire", mock.Anything, "pwd_reset_code:patrick@example.com", mock.AnythingOfType("time.Duration")).Return(nil).Once()
 				f.mailer.On("SendPasswordReset", mock.AnythingOfType("string"), "patrick@example.com").Return(nil).Once()
 			},
 		},
