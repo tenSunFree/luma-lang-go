@@ -43,40 +43,40 @@ func (uc *usecase) ResetPassword(ctx context.Context, req ResetPasswordRequest) 
 		return apperror.BadRequest("reset code is required")
 	}
 
-	lookupResp, lookupErr := uc.users.GetByEmail(ctx, users.GetByEmailRequest{Email: email})
-	if lookupErr != nil {
-		err = apperror.Unauthorized("reset code is invalid or expired")
-		logger.ErrorWithContext(ctx, "Reset password failed: user lookup error", logger.Fields{
-			"usecase": usecaseName, "method": funcName, "file": fileName,
-			"step": "get_user_by_email", "error": lookupErr.Error(), "email": email,
-		})
-		return err
-	}
-	user := lookupResp.User
-
 	maxAttempts := uc.cfg.PwdResetMaxAttempts
-	if maxAttempts <= 0 {
-		maxAttempts = 5
-	}
+    if maxAttempts <= 0 {
+    	maxAttempts = 5
+    }
 
-	attemptsKey := pwdResetAttemptsKey(email)
-	attempts, incrErr := uc.redisCache.Incr(ctx, attemptsKey)
-	if incrErr != nil {
-		logger.ErrorWithContext(ctx, "Reset password: failed to track attempts (non-fatal)", logger.Fields{
-			"usecase": usecaseName, "method": funcName, "file": fileName,
-			"step": "redis_incr_attempts", "error": incrErr.Error(), "email": email,
-		})
-	} else if attempts == 1 {
-		_ = uc.redisCache.Expire(ctx, attemptsKey, uc.cfg.PwdResetCodeTTL)
-	}
-	if attempts > int64(maxAttempts) {
-		err = apperror.Forbidden("too many invalid attempts, please request a new code")
-		logger.ErrorWithContext(ctx, "Reset password failed: lockout (max attempts exceeded)", logger.Fields{
-			"usecase": usecaseName, "method": funcName, "file": fileName,
-			"step": "check_lockout", "error": err.Error(), "email": email, "attempts": attempts,
-		})
-		return err
-	}
+    attemptsKey := pwdResetAttemptsKey(email)
+    attempts, incrErr := uc.redisCache.Incr(ctx, attemptsKey)
+    if incrErr != nil {
+    	logger.ErrorWithContext(ctx, "Reset password: failed to track attempts (non-fatal)", logger.Fields{
+    		"usecase": usecaseName, "method": funcName, "file": fileName,
+    		"step": "redis_incr_attempts", "error": incrErr.Error(), "email": email,
+    	})
+    } else if attempts == 1 {
+    	_ = uc.redisCache.Expire(ctx, attemptsKey, uc.cfg.PwdResetCodeTTL)
+    }
+    if attempts > int64(maxAttempts) {
+    	err = apperror.Forbidden("too many invalid attempts, please request a new code")
+    	logger.ErrorWithContext(ctx, "Reset password failed: lockout (max attempts exceeded)", logger.Fields{
+    		"usecase": usecaseName, "method": funcName, "file": fileName,
+    		"step": "check_lockout", "error": err.Error(), "email": email, "attempts": attempts,
+    	})
+    	return err
+    }
+
+    lookupResp, lookupErr := uc.users.GetByEmail(ctx, users.GetByEmailRequest{Email: email})
+    if lookupErr != nil {
+    	err = apperror.Unauthorized("reset code is invalid or expired")
+    	logger.ErrorWithContext(ctx, "Reset password failed: user lookup error", logger.Fields{
+    		"usecase": usecaseName, "method": funcName, "file": fileName,
+    		"step": "get_user_by_email", "error": lookupErr.Error(), "email": email,
+    	})
+    	return err
+    }
+    user := lookupResp.User
 
 	codeKey := pwdResetCodeKey(email)
 	storedCode, getErr := uc.redisCache.Get(ctx, codeKey)

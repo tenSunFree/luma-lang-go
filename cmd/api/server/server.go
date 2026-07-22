@@ -77,7 +77,7 @@ func NewApp() (*App, error) {
 	)
 
 	// cache
-	redisCache := caches.NewRedisCache(config.AppConfig.REDISHost, 0, config.AppConfig.REDISPassword, time.Duration(config.AppConfig.REDISExpired))
+	redisCache := caches.NewRedisCache(config.AppConfig.REDISHost, 0, config.AppConfig.REDISPassword, time.Duration(config.AppConfig.REDISExpired)*time.Minute)
 	ristrettoCache, err := caches.NewRistrettoCache()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create ristretto cache: %w", err)

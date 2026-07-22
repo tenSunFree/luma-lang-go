@@ -87,7 +87,7 @@ func (cache *redisCache) Set(ctx context.Context, key string, value interface{})
 
 	ctx, cancel := withTimeout(ctx)
 	defer cancel()
-	return cache.client.Set(ctx, key, payload, cache.expires*time.Minute).Err()
+	return cache.client.Set(ctx, key, payload, cache.expires).Err()
 }
 
 func (cache *redisCache) Get(ctx context.Context, key string) (string, error) {

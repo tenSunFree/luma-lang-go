@@ -66,6 +66,8 @@ func TestResetPassword(t *testing.T) {
 			code:        "483921",
 			newPassword: "Newpwd_999!",
 			setup: func(f *fixture) {
+				f.redis.On("Incr", mock.Anything, "pwd_reset_attempts:ghost@example.com").Return(int64(1), nil).Once()
+				f.redis.On("Expire", mock.Anything, "pwd_reset_attempts:ghost@example.com", mock.AnythingOfType("time.Duration")).Return(nil).Once()
 				f.users.On("GetByEmail", mock.Anything, users.GetByEmailRequest{Email: "ghost@example.com"}).
 					Return(users.GetByEmailResponse{}, apperror.NotFound("email not found")).Once()
 			},
@@ -93,8 +95,6 @@ func TestResetPassword(t *testing.T) {
 			code:        "483921",
 			newPassword: "Newpwd_999!",
 			setup: func(f *fixture) {
-				f.users.On("GetByEmail", mock.Anything, users.GetByEmailRequest{Email: "patrick@example.com"}).
-					Return(users.GetByEmailResponse{User: activeUser(t)}, nil).Once()
 				f.redis.On("Incr", mock.Anything, "pwd_reset_attempts:patrick@example.com").Return(int64(6), nil).Once()
 			},
 			wantErr:     true,
