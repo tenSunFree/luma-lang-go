@@ -198,7 +198,7 @@ const docTemplate = `{
         },
         "/auth/password/forgot": {
             "post": {
-                "description": "Emails an opaque reset token to the address. Always returns 200 even if the email isn't registered, to defeat user enumeration.",
+                "description": "Emails a six-digit reset code to the address. Always returns 200 even if the email isn't registered, to defeat user enumeration.",
                 "consumes": [
                     "application/json"
                 ],
@@ -208,7 +208,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Issue a password-reset token",
+                "summary": "Issue a password-reset code",
                 "parameters": [
                     {
                         "description": "Email address",
@@ -222,7 +222,7 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Reset email queued (or email not registered — same response either way)",
+                        "description": "Reset code queued (or email not registered — same response either way)",
                         "schema": {
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
@@ -244,7 +244,7 @@ const docTemplate = `{
         },
         "/auth/password/reset": {
             "post": {
-                "description": "Validates the token issued by ForgotPassword, sets the new password, and advances the revocation cutoff.",
+                "description": "Validates the six-digit code emailed by ForgotPassword and sets the new password in one step.",
                 "consumes": [
                     "application/json"
                 ],
@@ -254,10 +254,10 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Consume a reset token and set a new password",
+                "summary": "Verify reset code and set a new password",
                 "parameters": [
                     {
-                        "description": "Reset token + new password",
+                        "description": "Email + six-digit code + new password",
                         "name": "request",
                         "in": "body",
                         "required": true,
@@ -274,13 +274,19 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Malformed JSON body",
+                        "description": "Malformed request",
                         "schema": {
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
                     },
                     "401": {
-                        "description": "Reset token invalid or expired",
+                        "description": "Reset code invalid or expired",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Too many invalid attempts",
                         "schema": {
                             "$ref": "#/definitions/github_com_snykk_go-rest-boilerplate_internal_http_handlers_v1.BaseResponse"
                         }
@@ -1517,17 +1523,22 @@ const docTemplate = `{
         "github_com_snykk_go-rest-boilerplate_internal_http_datatransfers_requests.ResetPasswordRequest": {
             "type": "object",
             "required": [
-                "new_password",
-                "token"
+                "code",
+                "email",
+                "new_password"
             ],
             "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 50
+                },
                 "new_password": {
                     "type": "string",
                     "maxLength": 72,
                     "minLength": 8
-                },
-                "token": {
-                    "type": "string"
                 }
             }
         },

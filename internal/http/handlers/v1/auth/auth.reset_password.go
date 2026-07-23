@@ -13,15 +13,16 @@ import (
 )
 
 // ResetPassword godoc
-// @Summary      Consume a reset token and set a new password
-// @Description  Validates the token issued by ForgotPassword, sets the new password, and advances the revocation cutoff.
+// @Summary      Verify reset code and set a new password
+// @Description  Validates the six-digit code emailed by ForgotPassword and sets the new password in one step.
 // @Tags         auth
 // @Accept       json
 // @Produce      json
-// @Param        request  body      requests.ResetPasswordRequest  true  "Reset token + new password"
+// @Param        request  body      requests.ResetPasswordRequest  true  "Email + six-digit code + new password"
 // @Success      200  {object}  v1.BaseResponse  "Password reset"
-// @Failure      400  {object}  v1.BaseResponse  "Malformed JSON body"
-// @Failure      401  {object}  v1.BaseResponse  "Reset token invalid or expired"
+// @Failure      400  {object}  v1.BaseResponse  "Malformed request"
+// @Failure      401  {object}  v1.BaseResponse  "Reset code invalid or expired"
+// @Failure      403  {object}  v1.BaseResponse  "Too many invalid attempts"
 // @Failure      422  {object}  v1.BaseResponse  "Validation error"
 // @Router       /auth/password/reset [post]
 func (h Handler) ResetPassword(ctx *gin.Context) {
@@ -33,23 +34,16 @@ func (h Handler) ResetPassword(ctx *gin.Context) {
 	var req requests.ResetPasswordRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		logger.WarnWithContext(ctx.Request.Context(), "ResetPassword: invalid request body", logger.Fields{
-			"controller": controllerName,
-			"method":     funcName,
-			"file":       fileName,
-			"error":      err.Error(),
+			"controller": controllerName, "method": funcName, "file": fileName, "error": err.Error(),
 		})
 		v1.NewErrorResponse(ctx, http.StatusBadRequest, "invalid request body")
 		return
 	}
 	if err := validators.ValidatePayloads(req); err != nil {
 		logger.WarnWithContext(ctx.Request.Context(), "ResetPassword: validation error", logger.Fields{
-			"controller": controllerName,
-			"method":     funcName,
-			"file":       fileName,
-			"error":      err.Error(),
+			"controller": controllerName, "method": funcName, "file": fileName, "error": err.Error(),
 			"request": logger.Fields{
-				"has_token":        req.Token != "",
-				"has_new_password": req.NewPassword != "",
+				"email": req.Email, "has_code": req.Code != "", "has_new_password": req.NewPassword != "",
 			},
 		})
 		v1.RespondWithError(ctx, err)
@@ -57,7 +51,8 @@ func (h Handler) ResetPassword(ctx *gin.Context) {
 	}
 
 	if err := h.usecase.ResetPassword(ctx.Request.Context(), authuc.ResetPasswordRequest{
-		Token:       req.Token,
+		Email:       req.Email,
+		Code:        req.Code,
 		NewPassword: req.NewPassword,
 	}); err != nil {
 		ev := auditFromGin(ctx)
@@ -65,10 +60,7 @@ func (h Handler) ResetPassword(ctx *gin.Context) {
 		ev.Reason = err.Error()
 		audit.Record(ev)
 		logger.ErrorWithContext(ctx.Request.Context(), "ResetPassword failed in controller", logger.Fields{
-			"controller": controllerName,
-			"method":     funcName,
-			"file":       fileName,
-			"error":      err.Error(),
+			"controller": controllerName, "method": funcName, "file": fileName, "error": err.Error(),
 		})
 		v1.RespondWithError(ctx, err)
 		return

@@ -20,6 +20,7 @@ var templatesFS embed.FS
 // auto-escapes the OTP code, defending against an attacker
 // somehow injecting markup into the OTP path.
 var otpTpl = template.Must(template.ParseFS(templatesFS, "templates/otp.html"))
+var passwordResetTpl = template.Must(template.ParseFS(templatesFS, "templates/password_reset.html"))
 
 // otpTemplateData feeds the template. AppName / Region are constants
 // today; pulling them out makes white-labeling and i18n a config
@@ -39,15 +40,11 @@ const (
 )
 
 type OTPMailer interface {
-	// SendOTP delivers the OTP code to the receiver's inbox via the
-	// configured SMTP relay. The async wrapper (AsyncOTPMailer) makes
-	// this non-blocking from the request path; the inner sync impl
-	// blocks for the SMTP round-trip.
 	SendOTP(otpCode string, receiver string) (err error)
-	// SendPasswordReset delivers an opaque reset token to the receiver.
-	// The receiver is expected to follow a link the email contains
-	// back to /auth/password/reset; this layer just transmits the token.
-	SendPasswordReset(token string, receiver string) error
+	// SendPasswordReset delivers the six-digit password-reset code
+	// to the receiver's inbox, using a dedicated template so the
+	// user can tell it apart from an account-activation OTP.
+	SendPasswordReset(code string, receiver string) error
 }
 
 type otpMailer struct {
@@ -80,20 +77,33 @@ func (mailer *otpMailer) SendOTP(otpCode, receiver string) (err error) {
 	return dialer.DialAndSend(msg)
 }
 
-func (mailer *otpMailer) SendPasswordReset(token, receiver string) error {
-	body := fmt.Sprintf(
-		`<p>Use the following token to reset your password. The token expires in %d minutes.</p><p><b>%s</b></p>`,
-		defaultValidMinutes, template.HTMLEscapeString(token),
-	)
+func (mailer *otpMailer) SendPasswordReset(code, receiver string) error {
+	body, err := renderPasswordResetBody(code)
+	if err != nil {
+		return fmt.Errorf("render password reset template: %w", err)
+	}
+
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", mailer.email)
 	msg.SetHeader("To", receiver)
-	msg.SetHeader("Subject", "Password Reset")
+	msg.SetHeader("Subject", "Password Reset Code")
 	msg.SetBody("text/html", body)
 
 	dialer := gomail.NewDialer("smtp.gmail.com", 587, mailer.email, mailer.password)
 	dialer.Timeout = 10 * time.Second
 	return dialer.DialAndSend(msg)
+}
+
+func renderPasswordResetBody(code string) (string, error) {
+	var buf bytes.Buffer
+	data := otpTemplateData{
+		AppName: defaultAppName, Region: defaultRegion,
+		Code: code, Year: time.Now().Year(), ValidMinutes: defaultValidMinutes,
+	}
+	if err := passwordResetTpl.Execute(&buf, data); err != nil {
+		return "", err
+	}
+	return buf.String(), nil
 }
 
 // renderOTPBody is exported as a helper for tests so they can assert

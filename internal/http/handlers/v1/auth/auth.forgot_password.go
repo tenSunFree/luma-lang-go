@@ -13,13 +13,13 @@ import (
 )
 
 // ForgotPassword godoc
-// @Summary      Issue a password-reset token
-// @Description  Emails an opaque reset token to the address. Always returns 200 even if the email isn't registered, to defeat user enumeration.
+// @Summary      Issue a password-reset code
+// @Description  Emails a six-digit reset code to the address. Always returns 200 even if the email isn't registered, to defeat user enumeration.
 // @Tags         auth
 // @Accept       json
 // @Produce      json
 // @Param        request  body      requests.ForgotPasswordRequest  true  "Email address"
-// @Success      200  {object}  v1.BaseResponse  "Reset email queued (or email not registered — same response either way)"
+// @Success      200  {object}  v1.BaseResponse  "Reset code queued (or email not registered — same response either way)"
 // @Failure      400  {object}  v1.BaseResponse  "Malformed JSON body"
 // @Failure      422  {object}  v1.BaseResponse  "Validation error"
 // @Router       /auth/password/forgot [post]
@@ -77,5 +77,5 @@ func (h Handler) ForgotPassword(ctx *gin.Context) {
 	ev.Email = req.Email
 	audit.Record(ev)
 
-	v1.NewSuccessResponse(ctx, http.StatusOK, "if the email is registered, a reset link has been sent", nil)
+	v1.NewSuccessResponse(ctx, http.StatusOK, "if the email is registered, a reset code has been sent", nil)
 }

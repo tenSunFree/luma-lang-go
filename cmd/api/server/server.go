@@ -77,7 +77,7 @@ func NewApp() (*App, error) {
 	)
 
 	// cache
-	redisCache := caches.NewRedisCache(config.AppConfig.REDISHost, 0, config.AppConfig.REDISPassword, time.Duration(config.AppConfig.REDISExpired))
+	redisCache := caches.NewRedisCache(config.AppConfig.REDISHost, 0, config.AppConfig.REDISPassword, time.Duration(config.AppConfig.REDISExpired)*time.Minute)
 	ristrettoCache, err := caches.NewRistrettoCache()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create ristretto cache: %w", err)
@@ -120,14 +120,15 @@ func NewApp() (*App, error) {
 		BcryptCost: config.AppConfig.BcryptCost,
 	})
 	authUC := auth.NewUsecase(usersUC, jwtService, asyncMailer, redisCache, auth.Config{
-		OTPMaxAttempts:    config.AppConfig.OTPMaxAttempts,
-		OTPTTL:            time.Duration(config.AppConfig.REDISExpired) * time.Minute,
-		PasswordResetTTL:  30 * time.Minute,
-		BcryptCost:        config.AppConfig.BcryptCost,
-		LoginMaxAttempts:  10,
-		LoginLockoutTTL:   15 * time.Minute,
-		ForgotMaxAttempts: 3,
-		ForgotLockoutTTL:  15 * time.Minute,
+		OTPMaxAttempts:      config.AppConfig.OTPMaxAttempts,
+		OTPTTL:              time.Duration(config.AppConfig.REDISExpired) * time.Minute,
+		PwdResetCodeTTL:     10 * time.Minute,
+		PwdResetMaxAttempts: 5,
+		BcryptCost:          config.AppConfig.BcryptCost,
+		LoginMaxAttempts:    10,
+		LoginLockoutTTL:     15 * time.Minute,
+		ForgotMaxAttempts:   3,
+		ForgotLockoutTTL:    15 * time.Minute,
 	})
 
 	// API Routes

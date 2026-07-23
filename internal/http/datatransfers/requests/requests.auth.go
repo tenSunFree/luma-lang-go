@@ -79,6 +79,7 @@ type ForgotPasswordRequest struct {
 
 // ResetPasswordRequest is the body for POST /auth/password/reset.
 type ResetPasswordRequest struct {
-	Token       string `json:"token" validate:"required"`
+	Email       string `json:"email" validate:"required,email,max=50"`
+	Code        string `json:"code" validate:"required,numeric,len=6"`
 	NewPassword string `json:"new_password" validate:"required,min=8,max=72,strongpassword"`
 }

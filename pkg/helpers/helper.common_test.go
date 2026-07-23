@@ -25,3 +25,22 @@ func TestIsArrayContains(t *testing.T) {
 		t.Errorf("Expected %t but got %t", expected, result)
 	}
 }
+
+func TestMaskEmail(t *testing.T) {
+	tests := []struct {
+		name     string
+		email    string
+		expected string
+	}{
+		{"normal email", "patrick@example.com", "p******@example.com"},
+		{"single char local part", "a@example.com", "*@example.com"},
+		{"no at sign", "notanemail", "***"},
+		{"empty string", "", "***"},
+	}
+	for _, tt := range tests {
+		result := helpers.MaskEmail(tt.email)
+		if result != tt.expected {
+			t.Errorf("%s: expected %q but got %q", tt.name, tt.expected, result)
+		}
+	}
+}
