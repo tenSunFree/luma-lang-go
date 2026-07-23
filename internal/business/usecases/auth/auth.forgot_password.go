@@ -32,9 +32,9 @@ func (uc *usecase) ForgotPassword(ctx context.Context, req ForgotPasswordRequest
 	email := domain.NormalizeEmail(req.Email)
 
 	logger.InfoWithContext(ctx, fmt.Sprintf("Upper %s", funcName), logger.Fields{
-    		"usecase": usecaseName, "method": funcName, "file": fileName,
-    		"request": logger.Fields{"email": helpers.MaskEmail(email)},
-    	})
+		"usecase": usecaseName, "method": funcName, "file": fileName,
+		"request": logger.Fields{"email": helpers.MaskEmail(email)},
+	})
 	defer func() {
 		logger.InfoWithContext(ctx, fmt.Sprintf("Lower %s", funcName), logger.Fields{
 			"usecase": usecaseName, "method": funcName, "file": fileName,
@@ -45,76 +45,76 @@ func (uc *usecase) ForgotPassword(ctx context.Context, req ForgotPasswordRequest
 	if uc.cfg.ForgotMaxAttempts > 0 {
 		key := forgotAttemptsKey(email)
 		attempts, incrErr := uc.redisCache.Incr(ctx, key)
-        		if incrErr != nil {
-        			logger.ErrorWithContext(ctx, "ForgotPassword: failed to track attempts (non-fatal)", logger.Fields{
-        				"usecase": usecaseName, "method": funcName, "file": fileName,
-        				"step": "redis_incr_attempts", "error": incrErr.Error(), "email": helpers.MaskEmail(email),
-        			})
+		if incrErr != nil {
+			logger.ErrorWithContext(ctx, "ForgotPassword: failed to track attempts (non-fatal)", logger.Fields{
+				"usecase": usecaseName, "method": funcName, "file": fileName,
+				"step": "redis_incr_attempts", "error": incrErr.Error(), "email": helpers.MaskEmail(email),
+			})
 		} else if attempts == 1 {
 			_ = uc.redisCache.Expire(ctx, key, uc.cfg.ForgotLockoutTTL)
 		}
 		if attempts > int64(uc.cfg.ForgotMaxAttempts) {
-        			err = apperror.Forbidden("too many password reset requests, please try again later")
-        			logger.ErrorWithContext(ctx, "ForgotPassword failed: rate limit exceeded", logger.Fields{
-        				"usecase": usecaseName, "method": funcName, "file": fileName,
-        				"step": "check_rate_limit", "error": err.Error(), "email": helpers.MaskEmail(email), "attempts": attempts,
-        			})
-        			return err
-        		}
+			err = apperror.Forbidden("too many password reset requests, please try again later")
+			logger.ErrorWithContext(ctx, "ForgotPassword failed: rate limit exceeded", logger.Fields{
+				"usecase": usecaseName, "method": funcName, "file": fileName,
+				"step": "check_rate_limit", "error": err.Error(), "email": helpers.MaskEmail(email), "attempts": attempts,
+			})
+			return err
+		}
 	}
 
 	lookupResp, lookupErr := uc.users.GetByEmail(ctx, users.GetByEmailRequest{Email: email})
-    	if lookupErr != nil {
-    		var domErr *apperror.DomainError
-    		if errors.As(lookupErr, &domErr) && domErr.Type == apperror.ErrTypeNotFound {
-    			return nil
-    		}
-    		err = lookupErr
-    		logger.ErrorWithContext(ctx, "Forgot password failed: user lookup error", logger.Fields{
-    			"usecase": usecaseName, "method": funcName, "file": fileName,
-    			"step": "get_user_by_email", "error": lookupErr.Error(), "email": helpers.MaskEmail(email),
-    		})
-    		return err
-    	}
+	if lookupErr != nil {
+		var domErr *apperror.DomainError
+		if errors.As(lookupErr, &domErr) && domErr.Type == apperror.ErrTypeNotFound {
+			return nil
+		}
+		err = lookupErr
+		logger.ErrorWithContext(ctx, "Forgot password failed: user lookup error", logger.Fields{
+			"usecase": usecaseName, "method": funcName, "file": fileName,
+			"step": "get_user_by_email", "error": lookupErr.Error(), "email": helpers.MaskEmail(email),
+		})
+		return err
+	}
 
 	if !lookupResp.User.Active {
 		return nil
 	}
 
 	code, otpErr := helpers.GenerateOTPCode(6)
-    	if otpErr != nil {
-    		err = apperror.InternalCause(fmt.Errorf("generate reset code: %w", otpErr))
-    		logger.ErrorWithContext(ctx, "Forgot password failed: code generation error", logger.Fields{
-    			"usecase": usecaseName, "method": funcName, "file": fileName,
-    			"step": "generate_reset_code", "error": otpErr.Error(), "email": helpers.MaskEmail(email),
-    		})
-    		return err
-    	}
+	if otpErr != nil {
+		err = apperror.InternalCause(fmt.Errorf("generate reset code: %w", otpErr))
+		logger.ErrorWithContext(ctx, "Forgot password failed: code generation error", logger.Fields{
+			"usecase": usecaseName, "method": funcName, "file": fileName,
+			"step": "generate_reset_code", "error": otpErr.Error(), "email": helpers.MaskEmail(email),
+		})
+		return err
+	}
 
 	codeKey := pwdResetCodeKey(email)
 	attemptsKey := pwdResetAttemptsKey(email)
 
 	if delErr := uc.redisCache.Del(ctx, codeKey); delErr != nil {
-    	logger.ErrorWithContext(ctx, "Reset password: failed to delete used code (non-fatal, may allow replay until TTL expiry)", logger.Fields{
-    		"usecase": usecaseName, "method": funcName, "file": fileName,
-    		"step": "redis_del_reset_code", "error": delErr.Error(), "email": helpers.MaskEmail(email),
-    	})
-    }
-    if delErr := uc.redisCache.Del(ctx, attemptsKey); delErr != nil {
-    	logger.ErrorWithContext(ctx, "Reset password: failed to delete attempts counter (non-fatal)", logger.Fields{
-    		"usecase": usecaseName, "method": funcName, "file": fileName,
-    		"step": "redis_del_attempts", "error": delErr.Error(), "email": helpers.MaskEmail(email),
-    	})
-    }
+		logger.ErrorWithContext(ctx, "Reset password: failed to delete used code (non-fatal, may allow replay until TTL expiry)", logger.Fields{
+			"usecase": usecaseName, "method": funcName, "file": fileName,
+			"step": "redis_del_reset_code", "error": delErr.Error(), "email": helpers.MaskEmail(email),
+		})
+	}
+	if delErr := uc.redisCache.Del(ctx, attemptsKey); delErr != nil {
+		logger.ErrorWithContext(ctx, "Reset password: failed to delete attempts counter (non-fatal)", logger.Fields{
+			"usecase": usecaseName, "method": funcName, "file": fileName,
+			"step": "redis_del_attempts", "error": delErr.Error(), "email": helpers.MaskEmail(email),
+		})
+	}
 
 	if setErr := uc.redisCache.Set(ctx, codeKey, code); setErr != nil {
-    		err = apperror.InternalCause(fmt.Errorf("persist reset code: %w", setErr))
-    		logger.ErrorWithContext(ctx, "Forgot password failed: persist code error", logger.Fields{
-    			"usecase": usecaseName, "method": funcName, "file": fileName,
-    			"step": "redis_set_reset_code", "error": setErr.Error(), "email": helpers.MaskEmail(email),
-    		})
-    		return err
-    	}
+		err = apperror.InternalCause(fmt.Errorf("persist reset code: %w", setErr))
+		logger.ErrorWithContext(ctx, "Forgot password failed: persist code error", logger.Fields{
+			"usecase": usecaseName, "method": funcName, "file": fileName,
+			"step": "redis_set_reset_code", "error": setErr.Error(), "email": helpers.MaskEmail(email),
+		})
+		return err
+	}
 	if expireErr := uc.redisCache.Expire(ctx, codeKey, uc.cfg.PwdResetCodeTTL); expireErr != nil {
 		logger.ErrorWithContext(ctx, "Forgot password: failed to set TTL on reset code (non-fatal)", logger.Fields{
 			"usecase": usecaseName, "method": funcName, "file": fileName,
